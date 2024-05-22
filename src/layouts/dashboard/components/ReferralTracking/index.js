@@ -25,7 +25,7 @@ function ReferralTracking() {
 					sx={{ width: '100%' }}
 					mb='40px'>
 					<VuiTypography variant='lg' color='white' mr='auto' fontWeight='bold'>
-						Referral Tracking
+						Key Performance Indices
 					</VuiTypography>
 					<VuiBox
 						display='flex'
@@ -83,10 +83,10 @@ function ReferralTracking() {
 								}
 							})}>
 							<VuiTypography color='text' variant='button' fontWeight='regular' mb='5px'>
-								Invited
+								Successes
 							</VuiTypography>
 							<VuiTypography color='white' variant='lg' fontWeight='bold'>
-								145 people
+								145 
 							</VuiTypography>
 						</VuiBox>
 						<VuiBox
@@ -106,10 +106,10 @@ function ReferralTracking() {
 								}
 							})}>
 							<VuiTypography color='text' variant='button' fontWeight='regular' mb='5px'>
-								Bonus
+								Failures
 							</VuiTypography>
 							<VuiTypography color='white' variant='lg' fontWeight='bold'>
-								1,465
+								50
 							</VuiTypography>
 						</VuiBox>
 					</Stack>

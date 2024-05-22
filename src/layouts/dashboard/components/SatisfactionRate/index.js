@@ -16,10 +16,10 @@ const SatisfactionRate = () => {
 		<Card sx={{ height: '340px' }}>
 			<VuiBox display='flex' flexDirection='column'>
 				<VuiTypography variant='lg' color='white' fontWeight='bold' mb='4px'>
-					Satisfaction Rate
+					Savings Goals Achieved
 				</VuiTypography>
 				<VuiTypography variant='button' color='text' fontWeight='regular' mb='20px'>
-					From all projects
+					This Month
 				</VuiTypography>
 				<VuiBox sx={{ alignSelf: 'center', justifySelf: 'center', zIndex: '-1' }}>
 					<VuiBox sx={{ position: 'relative', display: 'inline-flex' }}>
@@ -76,9 +76,6 @@ const SatisfactionRate = () => {
 						sx={{ minWidth: '80px' }}>
 						<VuiTypography color='white' variant='h3'>
 							95%
-						</VuiTypography>
-						<VuiTypography color='text' variant='caption' fontWeight='regular'>
-							Based on likes
 						</VuiTypography>
 					</VuiBox>
 					<VuiTypography color='text' variant='caption' display='inline-block' fontWeight='regular'>
