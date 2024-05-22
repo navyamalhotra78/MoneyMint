@@ -41,7 +41,7 @@ function Footer() {
           <VuiTypography
             component="a"
             variant="button"
-            href="https://simmmple.com/"
+            href="/src/layouts/dashboard"
             sx={{ textAlign: "center", fontWeight: "500 !important" }}
             color="white"
             mr="2px"
