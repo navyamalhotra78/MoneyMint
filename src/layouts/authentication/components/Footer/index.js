@@ -58,9 +58,9 @@ function Footer() {
               color="text"
               mr="2px"
             >
-              Simmmple
+              Money Mint
             </VuiTypography>
-            &
+            {/* & */}
             <VuiTypography
               ml="2px"
               mr="2px"
@@ -70,7 +70,7 @@ function Footer() {
               sx={{ textAlign: "center", fontWeight: "500 !important" }}
               color="text"
             >
-              Creative Tim
+              {/* Creative Tim */}
             </VuiTypography>
             for a better web
           </VuiTypography>
