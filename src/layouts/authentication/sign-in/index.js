@@ -26,7 +26,6 @@ function SignIn() {
   const [rememberMe, setRememberMe] = useState(true);
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
-
   return (
     <CoverLayout
       title="Nice to see you!"

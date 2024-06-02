@@ -29,31 +29,42 @@ import borders from "assets/theme/base/borders";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 
 // Images
-import bgSignIn from "assets/images/signUpImage.png";
+import bgSignUp from "assets/images/signUpImage.png";
 
 function SignIn() {
   const [rememberMe, setRememberMe] = useState(true);
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  const imageStyle = {
+    width: '850px', 
+    height: '850px',
+    marginTop:'200px'
+  };
 
   return (
     <CoverLayout
       title="Welcome!"
       color="white"
       description="Enter the details below to create your account today."
-      image={bgSignIn}
+      // image={bgSignUp}
+      imageStyle={imageStyle}
       cardContent
     >
       <GradientBorder borderRadius={borders.borderRadius.form} minWidth="100%" maxWidth="100%">
         <VuiBox
-          component="form"
-          role="form"
-          borderRadius="inherit"
-          p="45px"
-          sx={({ palette: { secondary } }) => ({
-            backgroundColor: secondary.focus,
-          })}
-        >
+  component="form"
+  role="form"
+  borderRadius="inherit"
+  p="100px"
+  sx={({ palette: { secondary }, breakpoints }) => ({
+    backgroundColor: secondary.focus,
+    height: '600px',
+    width:'400px', // or any specific height you need, e.g., '500px'
+    marginLeft: 0, // Adjusts the horizontal margin to move the box to the left
+    marginRight: '500px'
+  })}
+>
+
           <VuiTypography
             color="white"
             fontWeight="bold"
@@ -94,34 +105,7 @@ function SignIn() {
                 </IconButton>
               </a>
             </GradientBorder>
-            <GradientBorder borderRadius="xl">
-              <a href="#">
-                <IconButton
-                  transition="all .25s ease"
-                  justify="center"
-                  align="center"
-                  bg="rgb(19,21,54)"
-                  borderradius="15px"
-                  sx={({ palette: { secondary }, borders: { borderRadius } }) => ({
-                    borderRadius: borderRadius.xl,
-                    padding: "25px",
-                    backgroundColor: secondary.focus,
-                    "&:hover": {
-                      backgroundColor: rgba(secondary.focus, 0.9),
-                    },
-                  })}
-                >
-                  <Icon
-                    as={FaApple}
-                    w="30px"
-                    h="30px"
-                    sx={({ palette: { white } }) => ({
-                      color: white.focus,
-                    })}
-                  />
-                </IconButton>
-              </a>
-            </GradientBorder>
+            
             <GradientBorder borderRadius="xl">
               <a href="#">
                 <IconButton
