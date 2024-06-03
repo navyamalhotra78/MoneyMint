@@ -162,7 +162,7 @@ function Dashboard() {
                           <IoWallet color="#fff" size="12px" />
                         </VuiBox>
                         <VuiTypography color="text" variant="button" fontWeight="medium">
-                          <Essentials></Essentials>
+                         Essentials
                         </VuiTypography>
                       </Stack>
                       <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
