@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 import { useState, useEffect } from "react";
 
 // react-router components
@@ -107,16 +89,16 @@ function DefaultNavbar({ transparent, light, action }) {
         <VuiBox component={Link} to="/" py={transparent ? 1.5 : 0.75} lineHeight={1}>
           <VuiTypography
             variant="button"
-            textGradient={true}
-            color="logo"
-            fontSize={14}
+            textGradient={false}
+            color="white"
+            fontSize={25}
             letterSpacing={2}
             fontWeight="medium"
             sx={{
               margin: "0 auto",
             }}
           >
-            VISION UI FREE
+            MoneyMint
           </VuiTypography>
         </VuiBox>
         <VuiBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>

@@ -32,6 +32,8 @@ function SignIn() {
       color="white"
       description="Enter your email and password to sign in"
       image={bgSignIn}
+      top={10}
+    
     >
       <VuiBox component="form" role="form">
         <VuiBox mb={2}>

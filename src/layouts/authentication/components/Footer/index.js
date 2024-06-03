@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 // @mui material components
 import Grid from "@mui/material/Grid";
 
@@ -34,7 +16,7 @@ function Footer() {
   return (
     <VuiBox
       component="footer"
-      py={6}
+      py={2}
       sx={({ breakpoints }) => ({
         maxWidth: "450px",
         [breakpoints.down("xl")]: {
@@ -43,13 +25,13 @@ function Footer() {
       })}
     >
       <Grid container justifyContent="center">
-        <Grid item xs={12} sx={{ textAlign: "center" }}>
+        <Grid item xs={12} sx={{ textAlign: "center" }} mx={"5px"} my={"-60px"}>
           <VuiTypography
             variant="button"
             sx={{ textAlign: "center", fontWeight: "400 !important" }}
             color="text"
           >
-            @ 2024, Made with ❤️&nbsp;&nbsp;&nbsp; by{" "}
+            Made with ❤️&nbsp; by{" "}
             <VuiTypography
               component="a"
               variant="button"
@@ -58,41 +40,9 @@ function Footer() {
               color="text"
               mr="2px"
             >
-              Money Mint
+              Money Mint&nbsp;@&nbsp;2024
             </VuiTypography>
-            {/* & */}
-            <VuiTypography
-              ml="2px"
-              mr="2px"
-              component="a"
-              variant="button"
-              href="#"
-              sx={{ textAlign: "center", fontWeight: "500 !important" }}
-              color="text"
-            >
-              {/* Creative Tim */}
-            </VuiTypography>
-            for a better web
           </VuiTypography>
-        </Grid>
-        <Grid item xs={10}>
-          <VuiBox display="flex" justifyContent="center" flexWrap="wrap" mb={3}>
-            <VuiBox mr={{ xs: "20px", lg: "46px" }}>
-              <VuiTypography component="a" href="#" variant="body2" color="text">
-                Marketplace
-              </VuiTypography>
-            </VuiBox>
-            <VuiBox mr={{ xs: "20px", lg: "46px" }}>
-              <VuiTypography component="a" href="#" variant="body2" color="text">
-                Blog
-              </VuiTypography>
-            </VuiBox>
-            <VuiBox>
-              <VuiTypography component="a" href="#" variant="body2" color="text">
-                License
-              </VuiTypography>
-            </VuiBox>
-          </VuiBox>
         </Grid>
       </Grid>
     </VuiBox>
