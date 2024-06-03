@@ -225,7 +225,7 @@ function Sidenav({ color, brandName, routes, ...rest }) {
           },
         })}
       >
-        <SidenavCard color={color} />
+        {/* <SidenavCard color={color} />
         <VuiBox mt={2}>
           <VuiButton
             component="a"
@@ -238,7 +238,8 @@ function Sidenav({ color, brandName, routes, ...rest }) {
           >
             Upgrade to PRO
           </VuiButton>
-        </VuiBox>
+        </VuiBox> */}
+        
       </VuiBox>
     </SidenavRoot>
   );
