@@ -8,7 +8,7 @@ import VuiAvatar from "components/VuiAvatar";
 import VuiProgress from "components/VuiProgress";
 
 // Images
-import AdobeXD from "examples/Icons/AdobeXD";
+
 import Atlassian from "examples/Icons/Atlassian";
 import Slack from "examples/Icons/Slack";
 import Spotify from "examples/Icons/Spotify";
@@ -57,7 +57,7 @@ export default function data() {
       {
         companies: (
           <VuiBox display="flex" alignItems="center">
-            <AdobeXD size="20px" />
+          
             <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
               Chakra Vision UI Version
             </VuiTypography>

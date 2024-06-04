@@ -8,16 +8,12 @@ import VuiAvatar from "components/VuiAvatar";
 import VuiProgress from "components/VuiProgress";
 
 // Images
-import AdobeXD from "examples/Icons/AdobeXD";
+
 import Atlassian from "examples/Icons/Atlassian";
 import Slack from "examples/Icons/Slack";
 import Spotify from "examples/Icons/Spotify";
 import Jira from "examples/Icons/Jira";
 import Invision from "examples/Icons/Invision";
-import logoSlack from "assets/images/small-logos/logo-slack.svg";
-import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
-import logoJira from "assets/images/small-logos/logo-jira.svg";
-import logoInvesion from "assets/images/small-logos/logo-invision.svg";
 import avatar1 from "assets/images/avatar1.png";
 import avatar2 from "assets/images/avatar2.png";
 import avatar3 from "assets/images/avatar3.png";
@@ -61,7 +57,7 @@ export default function data() {
       {
         شركات: (
           <VuiBox display="flex" alignItems="center">
-            <AdobeXD size="20px" />
+           
             <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
               إصدار Vision UI XD
             </VuiTypography>
