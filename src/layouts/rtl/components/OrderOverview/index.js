@@ -33,7 +33,7 @@ import { SiDropbox } from "react-icons/si";
 
 // Vision UI Dashboard React example components
 import TimelineItem from "examples/Timeline/TimelineItem";
-
+import AdobeXD from "examples/Icons/AdobeXD";
 
 // Vision UI Dashboard theme imports
 import palette from "assets/theme/base/colors";
@@ -83,7 +83,7 @@ function OrdersOverview() {
           title="تمت إضافة بطاقة جديدة للطلب #4395133"
           dateTime="18 DEC 4:54 AM"
         />
-        <TimelineItem  title="طلب جديد #9583120" dateTime="17 DEC" />
+        <TimelineItem icon={<AdobeXD size="20px" />} title="طلب جديد #9583120" dateTime="17 DEC" />
       </VuiBox>
     </Card>
   );
