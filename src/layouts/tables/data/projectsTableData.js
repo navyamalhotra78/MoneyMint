@@ -20,144 +20,70 @@ import logoSlack from "assets/images/small-logos/logo-slack.svg";
 import logoWebDev from "assets/images/small-logos/logo-webdev.svg";
 import logoXD from "assets/images/small-logos/logo-xd.svg";
 
-function Completion({ value, color }) {
-  return (
-    <VuiBox display="flex" flexDirection="column" alignItems="flex-start">
-      <VuiTypography variant="button" color="white" fontWeight="medium" mb="4px">
-        {value}%&nbsp;
-      </VuiTypography>
-      <VuiBox width="8rem">
-        <VuiProgress value={value} color={color} sx={{ background: "#2D2E5F" }} label={false} />
-      </VuiBox>
-    </VuiBox>
-  );
-}
-
-const action = (
-  <Icon sx={{ cursor: "pointer", fontWeight: "bold" }} fontSize="small">
-    more_vert
-  </Icon>
-);
-
 export default {
   columns: [
-    { name: "project", align: "left" },
-    { name: "budget", align: "left" },
-    { name: "status", align: "left" },
-    { name: "completion", align: "center" },
-    { name: "action", align: "center" },
+    { name: "item", align: "left" },
+    { name: "cost", align: "left" },
+    { name: "category", align: "left" },
   ],
 
   rows: [
     {
-      project: (
+      item: (
         <VuiBox display="flex" alignItems="center">
-          <AdobeXD size="20px" />
-          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Chakra Vision UI Version
+          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium" mx="-15px">
+            Dress
           </VuiTypography>
         </VuiBox>
       ),
-      budget: (
+      cost: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
-          $14,000
+          ₹2,000
         </VuiTypography>
       ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Working
+      category: (
+        <VuiTypography variant="button" color="white" fontWeight="medium" mx="20px">
+          Personal
         </VuiTypography>
       ),
-      completion: <Completion value={60} color="info" />,
-      action,
     },
     {
-      project: (
-        <VuiBox display="flex" alignItems="center">
-          <Atlassian size="20px" />
+      item: (
+        <VuiBox display="flex" alignItems="center" mx="-15px">
           <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Add Progress Track
+            Lunch
           </VuiTypography>
         </VuiBox>
       ),
-      budget: (
+      cost: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
-          $3,000
+          ₹3,000
         </VuiTypography>
       ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Done
+      category: (
+        <VuiTypography variant="button" color="white" fontWeight="medium" mx="20px">
+          Personal
         </VuiTypography>
-      ),
-      completion: <Completion value={100} color="info" />,
-      action,
+      )
     },
     {
-      project: (
-        <VuiBox display="flex" alignItems="center">
-          <Slack size="20px" />
+      item: (
+        <VuiBox display="flex" alignItems="center" mx="-15px">
           <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Fix Platform Errors
+           Eye Clinic
           </VuiTypography>
         </VuiBox>
       ),
-      budget: (
+      cost: (
         <VuiTypography variant="button" color="white" fontWeight="medium">
-          Not set
+          ₹1,800
         </VuiTypography>
       ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Canceled
+      category: (
+        <VuiTypography variant="button" color="white" fontWeight="medium" mx="20px">
+          Medical
         </VuiTypography>
-      ),
-      completion: <Completion value={30} color="info" />,
-      action,
-    },
-    {
-      project: (
-        <VuiBox display="flex" alignItems="center">
-          <Spotify size="20px" />
-          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Launch our Mobile App
-          </VuiTypography>
-        </VuiBox>
-      ),
-      budget: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          $32,000
-        </VuiTypography>
-      ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Canceled
-        </VuiTypography>
-      ),
-      completion: <Completion value={0} color="info" />,
-      action,
-    },
-    {
-      project: (
-        <VuiBox display="flex" alignItems="center">
-          <Jira size="20px" />
-          <VuiTypography pl="16px" color="white" variant="button" fontWeight="medium">
-            Add the New Pricing Page
-          </VuiTypography>
-        </VuiBox>
-      ),
-      budget: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          $2,300
-        </VuiTypography>
-      ),
-      status: (
-        <VuiTypography variant="button" color="white" fontWeight="medium">
-          Done
-        </VuiTypography>
-      ),
-      completion: <Completion value={100} color="info" />,
-      action,
-    },
+      )
+    }
   ],
 };
