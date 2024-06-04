@@ -91,10 +91,10 @@ function Configurator() {
   });
 
   return (
-    <ConfiguratorRoot variant="permanent" ownerState={{ openConfigurator }}>
+    <ConfiguratorRoot  ownerState={{ openConfigurator }}>
       <VuiBox
         backgroundColor="black"
-        display="flex"
+        display="none"
         justifyContent="space-between"
         alignItems="baseline"
         pt={3}
