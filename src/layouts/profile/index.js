@@ -35,7 +35,7 @@ function Overview() {
         <Grid
           container
           spacing={3}
-          mt={"-90px"}
+          mt={"-70px"}
           sx={({ breakpoints }) => ({
             [breakpoints.only("xl")]: {
               gridTemplateColumns: "repeat(2, 1fr)",
