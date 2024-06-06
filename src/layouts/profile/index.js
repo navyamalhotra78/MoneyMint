@@ -35,6 +35,7 @@ function Overview() {
         <Grid
           container
           spacing={3}
+          mt={"-90px"}
           sx={({ breakpoints }) => ({
             [breakpoints.only("xl")]: {
               gridTemplateColumns: "repeat(2, 1fr)",
@@ -52,7 +53,6 @@ function Overview() {
               },
             })}
           >
-            <CarInformations />
           </Grid>
           <Grid
             item
@@ -102,7 +102,6 @@ function Overview() {
         <Grid item xs={12} xl={9}>
         </Grid>
       </Grid>
-
       <Footer />
     </DashboardLayout>
   );

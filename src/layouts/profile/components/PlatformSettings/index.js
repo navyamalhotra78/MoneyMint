@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 import { useState } from "react";
 
 // @mui material components
@@ -36,32 +18,14 @@ function PlatformSettings() {
   const [mails, setMails] = useState(false);
 
   return (
-    <Card sx={{ minHeight: "490px", height: "100%" }}>
+    <Card sx={{ minHeight: "350px", height: "100%" }}>
       <VuiBox mb="26px">
         <VuiTypography variant="lg" fontWeight="bold" color="white" textTransform="capitalize">
-          platform settings
+          Notification settings
         </VuiTypography>
       </VuiBox>
       <VuiBox lineHeight={1.25}>
-        <VuiTypography
-          variant="xxs"
-          fontWeight="medium"
-          mb="20px"
-          color="text"
-          textTransform="uppercase"
-        >
-          account
-        </VuiTypography>
-        <VuiBox display="flex" mb="14px">
-          <VuiBox mt={0.25}>
-            <VuiSwitch color="info" checked={followsMe} onChange={() => setFollowsMe(!followsMe)} />
-          </VuiBox>
-          <VuiBox width="80%" ml={2}>
-            <VuiTypography variant="button" fontWeight="regular" color="text">
-              Email me when someone follows me
-            </VuiTypography>
-          </VuiBox>
-        </VuiBox>
+        
         <VuiBox display="flex" mb="14px">
           <VuiBox mt={0.25}>
             <VuiSwitch
@@ -72,7 +36,7 @@ function PlatformSettings() {
           </VuiBox>
           <VuiBox width="80%" ml={2}>
             <VuiTypography variant="button" fontWeight="regular" color="text">
-              Email me when someone answers on my post
+              Send me a reminder 2 days before a bill due date.
             </VuiTypography>
           </VuiBox>
         </VuiBox>
@@ -87,14 +51,9 @@ function PlatformSettings() {
           </VuiBox>
           <VuiBox width="80%" ml={2}>
             <VuiTypography variant="button" fontWeight="regular" color="text">
-              Email me when someone mentions me
+             Send me an email when a bill is overdue.
             </VuiTypography>
           </VuiBox>
-        </VuiBox>
-        <VuiBox mb="6px">
-          <VuiTypography variant="xxs" fontWeight="medium" color="text" textTransform="uppercase">
-            application
-          </VuiTypography>
         </VuiBox>
         <VuiBox display="flex" mb="14px">
           <VuiBox mt={0.25}>
@@ -106,7 +65,7 @@ function PlatformSettings() {
           </VuiBox>
           <VuiBox width="80%" ml={2}>
             <VuiTypography variant="button" fontWeight="regular" color="text">
-              New launches and projects
+              Send me an email when I go over budget.
             </VuiTypography>
           </VuiBox>
         </VuiBox>
@@ -120,31 +79,7 @@ function PlatformSettings() {
           </VuiBox>
           <VuiBox width="80%" ml={2}>
             <VuiTypography variant="button" fontWeight="regular" color="text">
-              Monthly product updates
-            </VuiTypography>
-          </VuiBox>
-        </VuiBox>
-        <VuiBox display="flex" mb="14px">
-          <VuiBox mt={0.25}>
-            <VuiSwitch
-              color="info"
-              checked={newsletter}
-              onChange={() => setNewsletter(!newsletter)}
-            />
-          </VuiBox>
-          <VuiBox width="80%" ml={2}>
-            <VuiTypography variant="button" fontWeight="regular" color="text">
-              Subscribe to newsletter
-            </VuiTypography>
-          </VuiBox>
-        </VuiBox>
-        <VuiBox display="flex">
-          <VuiBox mt={0.25}>
-            <VuiSwitch color="info" checked={mails} onChange={() => setMails(!mails)} />
-          </VuiBox>
-          <VuiBox width="80%" ml={2}>
-            <VuiTypography variant="button" fontWeight="regular" color="text">
-              Receive mails weekly
+             Send me a reminder on the first of every month to set my financial particulars.
             </VuiTypography>
           </VuiBox>
         </VuiBox>
