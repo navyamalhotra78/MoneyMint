@@ -11,6 +11,7 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import Table from "examples/Tables/Table";
+import Invoices from "layouts/billing/components/Invoices";
 
 // Data
 import authorsTableData from "layouts/tables/data/authorsTableData";
@@ -72,6 +73,9 @@ function Tables() {
             <Table columns={prCols} rows={prRows} />
           </VuiBox>
         </Card>
+        <VuiBox mt={3}> 
+          <Invoices />
+        </VuiBox>
       </VuiBox>
       <Footer />
     </DashboardLayout>

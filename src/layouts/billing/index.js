@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 // @mui material components
 import Grid from "@mui/material/Grid";
 
@@ -48,7 +30,7 @@ function Billing() {
                 <Grid item xs={12} xl={6}>
                   <MasterCard number={7812213908237916} valid="05/24" cvv="09X" />
                 </Grid>
-                <Grid item xs={12} md={12} xl={6}>
+                <Grid d item xs={12} md={12} xl={6}>
                   <CreditBalance />
                 </Grid>
                 <Grid item xs={12}>
