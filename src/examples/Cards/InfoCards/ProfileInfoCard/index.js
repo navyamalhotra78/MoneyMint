@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 // prop-types is library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -57,7 +39,7 @@ function ProfileInfoCard({ title, description, info, social }) {
       <VuiTypography variant="button" color="text" fontWeight="regular" textTransform="capitalize">
         {label}: &nbsp;
       </VuiTypography>
-      <VuiTypography variant="button" fontWeight="regular" color="white">
+      <VuiTypography variant="button" fontWeight="regular" color="white" >
         &nbsp;{values[key]}
       </VuiTypography>
     </VuiBox>
@@ -71,7 +53,7 @@ function ProfileInfoCard({ title, description, info, social }) {
       href={link}
       target="_blank"
       rel="noreferrer"
-      fontSize={size.lg}
+      fontSize={size.xl}
       color="white"
       pr={1}
       pl={0.5}
