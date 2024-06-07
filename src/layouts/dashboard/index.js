@@ -252,9 +252,6 @@ function Dashboard() {
           <Grid item xs={12} md={6} lg={8}>
             <Projects />
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <OrderOverview />
-          </Grid>
         </Grid>
       </VuiBox>
       <Footer />
