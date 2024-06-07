@@ -33,7 +33,7 @@ function SignIn() {
       description="Enter your email and password to sign in"
       image={bgSignIn}
       top={10}
-    
+      padding-top="45px"
     >
       <VuiBox component="form" role="form">
         <VuiBox mb={2}>

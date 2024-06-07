@@ -30,6 +30,8 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 
 // Images
 import bgSignIn from "assets/images/signUpImage.png";
+import { Height, Opacity, Tag, Visibility } from "@mui/icons-material";
+import { position } from "stylis";
 
 function SignIn() {
   const [rememberMe, setRememberMe] = useState(true);
@@ -40,13 +42,13 @@ function SignIn() {
     <CoverLayout
       title="Welcome!"
       color="white"
-      description="Use these awesome forms to login or create new account in your project for free."
       image={bgSignIn}
-      imageStyle={{ marginTop: "-150px"}}
+      imageStyle={{ opacity: "0.8" , maxWidth : "75%" , height :"75%", marginLeft: "10rem"  }}  
       cardContent
       top={13}
+      overflow="visible"
     >
-      <GradientBorder borderRadius={borders.borderRadius.form} minWidth="100%" maxWidth="100%">
+      <GradientBorder borderRadius={borders.borderRadius.form} minWidth="28vw" maxWidth="100%" marginTop="-25px" marginLeft="-10px" overflow="visible">
         <VuiBox
           component="form"
           role="form"
@@ -68,9 +70,11 @@ function SignIn() {
             Register with
           </VuiTypography>
           <Stack mb="25px" justifyContent="center" alignItems="center" direction="row" spacing={2}>
-            <GradientBorder borderRadius="xl">
+            
+            <GradientBorder borderRadius="xl" display="flex" gap="between">
               <a href="#">
                 <IconButton
+                  color="white"
                   transition="all .25s ease"
                   justify="center"
                   align="center"
@@ -78,63 +82,8 @@ function SignIn() {
                   borderradius="15px"
                   sx={({ palette: { secondary }, borders: { borderRadius } }) => ({
                     borderRadius: borderRadius.xl,
-                    padding: "25px",
-                    backgroundColor: secondary.focus,
-                    "&:hover": {
-                      backgroundColor: rgba(secondary.focus, 0.9),
-                    },
-                  })}
-                >
-                  <Icon
-                    as={FaFacebook}
-                    w="30px"
-                    h="30px"
-                    sx={({ palette: { white } }) => ({
-                      color: white.focus,
-                    })}
-                  />
-                </IconButton>
-              </a>
-            </GradientBorder>
-            <GradientBorder borderRadius="xl">
-              <a href="#">
-                <IconButton
-                  transition="all .25s ease"
-                  justify="center"
-                  align="center"
-                  bg="rgb(19,21,54)"
-                  borderradius="15px"
-                  sx={({ palette: { secondary }, borders: { borderRadius } }) => ({
-                    borderRadius: borderRadius.xl,
-                    padding: "25px",
-                    backgroundColor: secondary.focus,
-                    "&:hover": {
-                      backgroundColor: rgba(secondary.focus, 0.9),
-                    },
-                  })}
-                >
-                  <Icon
-                    as={FaApple}
-                    w="30px"
-                    h="30px"
-                    sx={({ palette: { white } }) => ({
-                      color: white.focus,
-                    })}
-                  />
-                </IconButton>
-              </a>
-            </GradientBorder>
-            <GradientBorder borderRadius="xl">
-              <a href="#">
-                <IconButton
-                  transition="all .25s ease"
-                  justify="center"
-                  align="center"
-                  bg="rgb(19,21,54)"
-                  borderradius="15px"
-                  sx={({ palette: { secondary }, borders: { borderRadius } }) => ({
-                    borderRadius: borderRadius.xl,
-                    padding: "25px",
+                    paddingRight: "80px",
+                    paddingLeft: "80px",
                     backgroundColor: secondary.focus,
                     "&:hover": {
                       backgroundColor: rgba(secondary.focus, 0.9),
@@ -149,6 +98,12 @@ function SignIn() {
                       color: white.focus,
                     })}
                   />
+                  <VuiTypography 
+                  mb="20px"
+                  sx={({ typography: { size } }) => ({ fontSize: size.lg })}
+                  >
+                    Google
+                  </VuiTypography>
                 </IconButton>
               </a>
             </GradientBorder>
@@ -188,7 +143,7 @@ function SignIn() {
           </VuiBox>
           <VuiBox mb={2}>
             <VuiBox mb={1} ml={0.5}>
-              <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
+              <VuiTypography component="label" variant="button" color="white" fontWeight="medium" >
                 Email
               </VuiTypography>
             </VuiBox>
