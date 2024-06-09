@@ -12,6 +12,7 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import Icon from "@mui/material/Icon";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
@@ -140,6 +141,23 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   </VuiTypography>
                 </IconButton>
               </Link>
+              <IconButton sx={navbarIconButton} size="large">
+                  <Icon
+                    sx={({ palette: { dark, white } }) => ({
+                      color: light ? white.main : dark.main,
+                    })}
+                  >
+                    logout
+                  </Icon>
+                  <VuiTypography
+                    variant="button"
+                    fontWeight="medium"
+                    color={light ? "white" : "dark"}
+                  >
+                    Sign out
+                  </VuiTypography>
+                </IconButton> 
+
               <IconButton
                 size="large"
                 color="inherit"
