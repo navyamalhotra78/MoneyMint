@@ -40,6 +40,7 @@
 
 // Vision UI Dashboard React layouts
 import Dashboard from "layouts/dashboard";
+import Home from "layouts/home";
 import Tables from "layouts/tables";
 import Billing from "layouts/billing";
 import Profile from "layouts/profile";
@@ -54,14 +55,24 @@ import { IoBuild } from "react-icons/io5";
 import { BsCreditCardFill } from "react-icons/bs";
 import { IoStatsChart } from "react-icons/io5";
 import { IoHome } from "react-icons/io5";
+import { IoAppsSharp } from "react-icons/io5";
 
 const routes = [
+  {
+    type: "collapse",
+    name: "Home",
+    key: "home",
+    route: "/home",
+    icon: <IoHome size="15px" color="inherit" />,
+    component: Home,
+    noCollapse: true,
+  },
   {
     type: "collapse",
     name: "Dashboard",
     key: "dashboard",
     route: "/dashboard",
-    icon: <IoHome size="15px" color="inherit" />,
+    icon: <IoAppsSharp size="15px" color="inherit" />,
     component: Dashboard,
     noCollapse: true,
   },
