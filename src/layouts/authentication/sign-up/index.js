@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 
 // Icons
-import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
@@ -99,7 +99,7 @@ function SignIn() {
                     })}
                   />
                   <VuiTypography 
-                  mb="20px"
+                  mb="20px" ml="20px" color="white" mt="20px"
                   sx={({ typography: { size } }) => ({ fontSize: size.lg })}
                   >
                     Google

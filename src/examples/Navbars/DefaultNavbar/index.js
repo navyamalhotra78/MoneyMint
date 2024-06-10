@@ -1,25 +1,13 @@
 import { useState, useEffect } from "react";
-
-// react-router components
-import { Link } from "react-router-dom";
-
-// prop-types is a library for typechecking of props.
+import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
-
-// @mui material components
 import Container from "@mui/material/Container";
 import Icon from "@mui/material/Icon";
-
-// Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import VuiButton from "components/VuiButton";
-
-// Vision UI Dashboard React example components
 import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink";
 import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMobile";
-
-// Vision UI Dashboard React base styles
 import breakpoints from "assets/theme/base/breakpoints";
 import colors from "assets/theme/base/colors";
 import borders from "assets/theme/base/borders";
@@ -34,7 +22,6 @@ function DefaultNavbar({ transparent, light, action }) {
   const closeMobileNavbar = () => setMobileNavbar(false);
 
   useEffect(() => {
-    // A function that sets the display state for the DefaultNavbarMobile.
     function displayMobileNavbar() {
       if (window.innerWidth < breakpoints.values.lg) {
         setMobileView(true);
@@ -45,18 +32,20 @@ function DefaultNavbar({ transparent, light, action }) {
       }
     }
 
-    /** 
-     The event listener that's calling the displayMobileNavbar function when 
-     resizing the window.
-    */
     window.addEventListener("resize", displayMobileNavbar);
-
-    // Call the displayMobileNavbar function to set the state with the initial value.
     displayMobileNavbar();
-
-    // Remove event listener on cleanup
     return () => window.removeEventListener("resize", displayMobileNavbar);
   }, []);
+
+  const location = useLocation();
+
+  // Define the sign-up route as an absolute path
+  const signUpRoute = '/authentication/sign-up';
+  const signInRoute = '/authentication/sign-in';
+  
+  // Conditionally render the "Sign Up" and "Sign In" links based on the current route
+  const renderSignUpLink = location.pathname !== signUpRoute;
+  const renderSignInLink = location.pathname !== signInRoute;
 
   return (
     <Container>
@@ -104,9 +93,25 @@ function DefaultNavbar({ transparent, light, action }) {
         <VuiBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
           <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" />
           <DefaultNavbarLink icon="person" name="profile" route="/profile" />
-          <DefaultNavbarLink icon="account_circle" name="sign up" route="/authentication/sign-up" />
-          <DefaultNavbarLink icon="key" name="sign in" route="/authentication/sign-in" />
-          <DefaultNavbarLink icon="key" name="log out" />
+          {renderSignUpLink && (
+            <Link to="/authentication/sign-up">
+              <DefaultNavbarLink
+                icon="account_circle"
+                name="Sign Up"
+                route="/authentication/sign-up"
+              />
+            </Link>
+          )}
+          {renderSignInLink && (
+            <Link to="/authentication/sign-in">
+              <DefaultNavbarLink
+                icon="key"
+                name="Sign In"
+                route="/authentication/sign-in"
+              />
+            </Link>
+          )}
+          <DefaultNavbarLink icon="logout" name="log out" />
         </VuiBox>
         {action &&
           (action.type === "internal" ? (
