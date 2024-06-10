@@ -137,7 +137,25 @@ function DashboardNavbar({ absolute, light, isMini }) {
                     fontWeight="medium"
                     color={light ? "white" : "dark"}
                   >
-                    Sign in
+                    Sign In
+                  </VuiTypography>
+                </IconButton>
+              </Link>
+              <Link to="/authentication/sign-in">
+                <IconButton sx={navbarIconButton} size="large">
+                  <Icon
+                    sx={({ palette: { dark, white } }) => ({
+                      color: light ? white.main : dark.main,
+                    })}
+                  >
+                    key
+                  </Icon>
+                  <VuiTypography
+                    variant="button"
+                    fontWeight="medium"
+                    color={light ? "white" : "dark"}
+                  >
+                    Sign Up
                   </VuiTypography>
                 </IconButton>
               </Link>
