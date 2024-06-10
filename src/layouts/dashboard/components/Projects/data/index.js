@@ -93,8 +93,7 @@ export default function data() {
         members: (
           <VuiBox display="flex" py={1}>
             {avatars([
-              [avatar2, "Romina Hadid"],
-              [avatar4, "Jessica Doe"],
+            
             ])}
           </VuiBox>
         ),
@@ -183,7 +182,7 @@ export default function data() {
         ),
         members: (
           <VuiBox display="flex" py={1}>
-            {avatars([[avatar4, "Jessica Doe"]])}
+            {avatars([])}
           </VuiBox>
         ),
         budget: (
