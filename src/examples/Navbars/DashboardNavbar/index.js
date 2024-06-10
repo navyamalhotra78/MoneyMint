@@ -1,29 +1,16 @@
 import { useState, useEffect } from "react";
-
-// react-router components
 import { useLocation, Link } from "react-router-dom";
-
-// prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
-
-// @material-ui core components
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import Icon from "@mui/material/Icon";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-
-// Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
-import VuiInput from "components/VuiInput";
-
-// Vision UI Dashboard React example components
 import Breadcrumbs from "examples/Breadcrumbs";
 import NotificationItem from "examples/Items/NotificationItem";
-
-// Custom styles for DashboardNavbar
 import {
   navbar,
   navbarContainer,
@@ -31,16 +18,12 @@ import {
   navbarIconButton,
   navbarMobileMenu,
 } from "examples/Navbars/DashboardNavbar/styles";
-
-// Vision UI Dashboard React context
 import {
   useVisionUIController,
   setTransparentNavbar,
   setMiniSidenav,
   setOpenConfigurator,
 } from "context";
-
-// Images
 import team2 from "assets/images/team-2.jpg";
 import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
 
@@ -49,31 +32,23 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const [controller, dispatch] = useVisionUIController();
   const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator } = controller;
   const [openMenu, setOpenMenu] = useState(false);
-  const route = useLocation().pathname.split("/").slice(1);
+  const location = useLocation();
+  const route = location.pathname.split("/").slice(1);
 
   useEffect(() => {
-    // Setting the navbar type
     if (fixedNavbar) {
       setNavbarType("sticky");
     } else {
       setNavbarType("static");
     }
 
-    // A function that sets the transparent state of the navbar.
     function handleTransparentNavbar() {
       setTransparentNavbar(dispatch, (fixedNavbar && window.scrollY === 0) || !fixedNavbar);
     }
 
-    /** 
-     The event listener that's calling the handleTransparentNavbar function when 
-     scrolling the window.
-    */
     window.addEventListener("scroll", handleTransparentNavbar);
-
-    // Call the handleTransparentNavbar function to set the state with the initial value.
     handleTransparentNavbar();
 
-    // Remove event listener on cleanup
     return () => window.removeEventListener("scroll", handleTransparentNavbar);
   }, [dispatch, fixedNavbar]);
 
@@ -82,7 +57,6 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
   const handleCloseMenu = () => setOpenMenu(false);
 
-  // Render the notifications menu
   const renderMenu = () => (
     <Menu
       anchorEl={openMenu}
@@ -121,9 +95,45 @@ function DashboardNavbar({ absolute, light, isMini }) {
         </VuiBox>
         {isMini ? null : (
           <VuiBox sx={(theme) => navbarRow(theme, { isMini })}>
-            
-            <VuiBox color={light ? "white" : "inherit"}>  
-              <IconButton sx={navbarIconButton} size="large">
+            {location.pathname === "/home" && (
+              <VuiBox color={light ? "white" : "inherit"} sx={{ display: "flex", alignItems: "center" }}>
+                <IconButton sx={navbarIconButton} size="large">
+                  <Icon
+                    sx={({ palette: { dark, white } }) => ({
+                      color: light ? white.main : dark.main,
+                    })}
+                  >
+                    account_profile
+                  </Icon>
+                  <VuiTypography
+                    variant="button"
+                    fontWeight="medium"
+                    color={light ? "white" : "dark"}
+                    sx={{ ml: 1 }}
+                  >
+                    Sign In
+                  </VuiTypography>
+                </IconButton>
+                <IconButton sx={navbarIconButton} size="large">
+                  <Icon
+                    sx={({ palette: { dark, white } }) => ({
+                      color: light ? white.main : dark.main,
+                    })}
+                  >
+                    key
+                  </Icon>
+                  <VuiTypography
+                    variant="button"
+                    fontWeight="medium"
+                    color={light ? "white" : "dark"}
+                    sx={{ ml: 1 }}
+                  >
+                    Sign Up
+                  </VuiTypography>
+                </IconButton>
+              </VuiBox>
+            )}
+            <IconButton sx={navbarIconButton} size="large">
                   <Icon
                     sx={({ palette: { dark, white } }) => ({
                       color: light ? white.main : dark.main,
@@ -135,39 +145,38 @@ function DashboardNavbar({ absolute, light, isMini }) {
                     variant="button"
                     fontWeight="medium"
                     color={light ? "white" : "dark"}
+                    sx={{ ml: 1 }}
                   >
-                    Sign out
+                    Logout
                   </VuiTypography>
-                </IconButton> 
-
-              <IconButton
-                size="large"
-                color="inherit"
-                sx={navbarMobileMenu}
-                onClick={handleMiniSidenav}
-              >
-                <Icon className={"text-white"}>{miniSidenav ? "menu_open" : "menu"}</Icon>
-              </IconButton>
-              <IconButton
-                size="large"
-                color="inherit"
-                sx={navbarIconButton}
-                onClick={handleConfiguratorOpen}
-              >
-              </IconButton>
-              <IconButton
-                size="large"
-                color="inherit"
-                sx={navbarIconButton}
-                aria-controls="notification-menu"
-                aria-haspopup="true"
-                variant="contained"
-                onClick={handleOpenMenu}
-              >
-                <Icon className={light ? "text-white" : "text-dark"}>notifications</Icon>
-              </IconButton>
-              {renderMenu()}
-            </VuiBox>
+                </IconButton>
+            <IconButton
+              size="large"
+              color="inherit"
+              sx={navbarMobileMenu}
+              onClick={handleMiniSidenav}
+            >
+              <Icon className={"text-white"}>{miniSidenav ? "menu_open" : "menu"}</Icon>
+            </IconButton>
+            <IconButton
+              size="large"
+              color="inherit"
+              sx={navbarIconButton}
+              onClick={handleConfiguratorOpen}
+            >
+            </IconButton>
+            <IconButton
+              size="large"
+              color="inherit"
+              sx={navbarIconButton}
+              aria-controls="notification-menu"
+              aria-haspopup="true"
+              variant="contained"
+              onClick={handleOpenMenu}
+            >
+              <Icon className={light ? "text-white" : "text-dark"}>notifications</Icon>
+            </IconButton>
+            {renderMenu()}
           </VuiBox>
         )}
       </Toolbar>
@@ -175,14 +184,12 @@ function DashboardNavbar({ absolute, light, isMini }) {
   );
 }
 
-// Setting default values for the props of DashboardNavbar
 DashboardNavbar.defaultProps = {
   absolute: false,
   light: false,
   isMini: false,
 };
 
-// Typechecking props for the DashboardNavbar
 DashboardNavbar.propTypes = {
   absolute: PropTypes.bool,
   light: PropTypes.bool,

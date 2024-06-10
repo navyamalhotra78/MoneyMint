@@ -14,10 +14,7 @@ import Slack from "examples/Icons/Slack";
 import Spotify from "examples/Icons/Spotify";
 import Jira from "examples/Icons/Jira";
 import Invision from "examples/Icons/Invision";
-import avatar1 from "assets/images/avatar1.png";
-import avatar2 from "assets/images/avatar2.png";
-import avatar3 from "assets/images/avatar3.png";
-import avatar4 from "assets/images/avatar4.png";
+
 
 export default function data() {
   const avatars = (members) =>
@@ -66,10 +63,7 @@ export default function data() {
         members: (
           <VuiBox display="flex" py={1}>
             {avatars([
-              [avatar1, "Ryan Tompson"],
-              [avatar2, "Romina Hadid"],
-              [avatar3, "Alexander Smith"],
-              [avatar4, "Jessica Doe"],
+              
             ])}
           </VuiBox>
         ),
@@ -130,8 +124,7 @@ export default function data() {
         members: (
           <VuiBox display="flex" py={1}>
             {avatars([
-              [avatar1, "Ryan Tompson"],
-              [avatar3, "Alexander Smith"],
+              
             ])}
           </VuiBox>
         ),
@@ -161,10 +154,7 @@ export default function data() {
         members: (
           <VuiBox display="flex" py={1}>
             {avatars([
-              [avatar4, "Jessica Doe"],
-              [avatar3, "Alexander Smith"],
-              [avatar2, "Romina Hadid"],
-              [avatar1, "Ryan Tompson"],
+            
             ])}
           </VuiBox>
         ),
@@ -222,8 +212,7 @@ export default function data() {
         members: (
           <VuiBox display="flex" py={1}>
             {avatars([
-              [avatar1, "Ryan Tompson"],
-              [avatar4, "Jessica Doe"],
+             
             ])}
           </VuiBox>
         ),
