@@ -122,43 +122,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
         {isMini ? null : (
           <VuiBox sx={(theme) => navbarRow(theme, { isMini })}>
             
-            <VuiBox color={light ? "white" : "inherit"}>
-              <Link to="/authentication/sign-in">
-                <IconButton sx={navbarIconButton} size="large">
-                  <Icon
-                    sx={({ palette: { dark, white } }) => ({
-                      color: light ? white.main : dark.main,
-                    })}
-                  >
-                    account_circle
-                  </Icon>
-                  <VuiTypography
-                    variant="button"
-                    fontWeight="medium"
-                    color={light ? "white" : "dark"}
-                  >
-                    Sign In
-                  </VuiTypography>
-                </IconButton>
-              </Link>
-              <Link to="/authentication/sign-in">
-                <IconButton sx={navbarIconButton} size="large">
-                  <Icon
-                    sx={({ palette: { dark, white } }) => ({
-                      color: light ? white.main : dark.main,
-                    })}
-                  >
-                    key
-                  </Icon>
-                  <VuiTypography
-                    variant="button"
-                    fontWeight="medium"
-                    color={light ? "white" : "dark"}
-                  >
-                    Sign Up
-                  </VuiTypography>
-                </IconButton>
-              </Link>
+            <VuiBox color={light ? "white" : "inherit"}>  
               <IconButton sx={navbarIconButton} size="large">
                   <Icon
                     sx={({ palette: { dark, white } }) => ({
