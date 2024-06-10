@@ -48,8 +48,6 @@ const WelcomeMark = () => {
             },
           }}
         >
-          Tap to record
-          <Icon sx={{ fontWeight: "bold", ml: "5px" }}>arrow_forward</Icon>
         </VuiTypography>
       </VuiBox>
     </Card>

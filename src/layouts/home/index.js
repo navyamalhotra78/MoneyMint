@@ -49,38 +49,7 @@ function Dashboard() {
     <DashboardLayout>
       <DashboardNavbar />
       <VuiBox py={3}>
-        <VuiBox mb={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "Total Income", fontWeight: "regular" }}
-                count="₹50,000"
-                icon={{ color: "info", component: <IoWallet size="22px" color="white" /> }}
-              />
-            </Grid>
-            <Grid item xs={12} md={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "Today's Expenditure" }}
-                count="₹5000"
-                icon={{ color: "info", component: <IoGlobe size="22px" color="white" /> }}
-              />
-            </Grid>
-            <Grid item xs={12} md={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "Monthly Expenditure" }}
-                count="₹30,000"
-                icon={{ color: "info", component: <FaShoppingCart size="20px" color="white" /> }}
-              />
-            </Grid>
-            <Grid item xs={12} md={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "Next Bill Due Date" }}
-                count="25/05/2024"
-                icon={{ color: "info", component: <IoDocumentText size="22px" color="white" /> }}
-              />
-            </Grid>
-          </Grid>
-        </VuiBox>
+        
         <VuiBox mb={3}>
           <Grid container spacing="18px">
             <Grid item xs={12} lg={12} xl={5}>
