@@ -113,7 +113,7 @@ function Dashboard() {
         </Grid>
         <Grid>
           <Grid item>
-            <Link to="/authentication/sign up/index.js">
+            <Link to="/authentication/sign-up">
             <VuiTypography color="white" style={{ fontSize: '22px' }} ml={42} mr={5} mt={5} mb={3}>
               Sign up today and get started on your journey of financial mastery!
             </VuiTypography>
