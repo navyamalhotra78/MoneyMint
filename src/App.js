@@ -108,9 +108,7 @@ export default function App() {
       sx={{ cursor: "pointer" }}
       onClick={handleConfiguratorOpen}
     >
-      <Icon fontSize="default" color="inherit">
-        settings
-      </Icon>
+     
     </VuiBox>
   );
 
