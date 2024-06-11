@@ -10,7 +10,7 @@ import Stack from "@mui/material/Stack";
 
 // Icons
 import { FaGoogle } from "react-icons/fa";
-import { FaGoogle } from "react-icons/fa";
+
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
@@ -116,7 +116,7 @@ function SignIn() {
           </VuiTypography>
           <Stack mb="25px" justifyContent="center" alignItems="center" direction="row" spacing={2}>
             <GradientBorder borderRadius="xl" display="flex" gap="between">
-              <a href="#">
+              <a href="#"/>
                 <IconButton
                   color="white"
                   transition="all .25s ease"
@@ -148,6 +148,7 @@ function SignIn() {
                 >
                   Google
                 </VuiTypography>
+                
               </IconButton>
             </GradientBorder>
           </Stack>
