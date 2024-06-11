@@ -10,6 +10,7 @@ import Stack from "@mui/material/Stack";
 
 // Icons
 import { FaGoogle } from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
@@ -115,33 +116,33 @@ function SignIn() {
           </VuiTypography>
           <Stack mb="25px" justifyContent="center" alignItems="center" direction="row" spacing={2}>
             <GradientBorder borderRadius="xl" display="flex" gap="between">
-              <IconButton
-                color="white"
-                transition="all .25s ease"
-                justify="center"
-                align="center"
-                bg="rgb(19,21,54)"
-                borderradius="15px"
-                onClick={handleGoogleSignIn}
-                sx={({ palette: { secondary }, borders: { borderRadius } }) => ({
-                  borderRadius: borderRadius.xl,
-                  paddingRight: "80px",
-                  paddingLeft: "80px",
-                  backgroundColor: secondary.focus,
-                  "&:hover": {
-                    backgroundColor: rgba(secondary.focus, 0.9),
-                  },
-                })}
-              >
-                <Icon
-                  as={FaGoogle}
-                  w="30px"
-                  h="30px"
-                  sx={({ palette: { white } }) => ({
-                    color: white.focus,
+              <a href="#">
+                <IconButton
+                  color="white"
+                  transition="all .25s ease"
+                  justify="center"
+                  align="center"
+                  bg="rgb(19,21,54)"
+                  borderradius="15px"
+                  sx={({ palette: { secondary }, borders: { borderRadius } }) => ({
+                    borderRadius: borderRadius.xl,
+                    paddingRight: "80px",
+                    paddingLeft: "80px",
+                    backgroundColor: secondary.focus,
+                    "&:hover": {
+                      backgroundColor: rgba(secondary.focus, 0.9),
+                    },
                   })}
-                />
-                <VuiTypography
+                >
+                  <Icon
+                    as={FaGoogle}
+                    w="30px"
+                    h="30px"
+                    sx={({ palette: { white } }) => ({
+                      color: white.focus,
+                    })}
+                  />
+                  <VuiTypography 
                   mb="20px"
                   sx={({ typography: { size } }) => ({ fontSize: size.lg })}
                 >

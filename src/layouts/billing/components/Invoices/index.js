@@ -28,7 +28,7 @@ function Invoices() {
           <Invoice date="June, 25, 2019" id="#MS-415646" price="₹180" />
           <Invoice date="March, 01, 2019" id="#AR-803481" price="₹300" noGutter />
         </VuiBox>
-        <VuiBox mt="20px" display="flex" justifyContent="center">
+        <VuiBox mt="20px" display="flex" justifyContent="center" ml="-1080px">
           <VuiButton variant="contained" color="info" size="medium" cursor="pointer">
             UPLOAD
           </VuiButton>

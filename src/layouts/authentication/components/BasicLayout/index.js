@@ -20,13 +20,6 @@ function BasicLayout({ title, description, image, children }) {
   return (
     <PageLayout>
       <DefaultNavbar
-        action={{
-          type: "external",
-          route: "https://creative-tim.com/product/vision-ui-dashboard-react",
-          label: "Free Download",
-        }}
-        transparent
-        light
       />
       <VuiBox
         width="calc(100% - 2rem)"
