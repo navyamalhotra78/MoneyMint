@@ -11,7 +11,6 @@ import Stack from "@mui/material/Stack";
 // Icons
 import { FaGoogle } from "react-icons/fa";
 
-
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
@@ -50,10 +49,10 @@ function SignIn() {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const userId = userCredential.user.uid;
       const db = getDatabase();
-      const usersRef = ref(db, 'users/' + userId);
+      const usersRef = ref(db, "users/" + userId);
       await set(usersRef, {
         username: name,
-        email: email
+        email: email,
       });
 
       console.log("User signed up successfully!");
@@ -68,7 +67,6 @@ function SignIn() {
       console.error("Error signing up:", error.message);
     }
   };
-
 
   const handleGoogleSignIn = async () => {
     try {
@@ -93,7 +91,14 @@ function SignIn() {
       top={13}
       overflow="visible"
     >
-      <GradientBorder borderRadius={borders.borderRadius.form} minWidth="28vw" maxWidth="100%" marginTop="-25px" marginLeft="-10px" overflow="visible">
+      <GradientBorder
+        borderRadius={borders.borderRadius.form}
+        minWidth="28vw"
+        maxWidth="100%"
+        marginTop="-25px"
+        marginLeft="-10px"
+        overflow="visible"
+      >
         <VuiBox
           component="form"
           role="form"
@@ -116,7 +121,7 @@ function SignIn() {
           </VuiTypography>
           <Stack mb="25px" justifyContent="center" alignItems="center" direction="row" spacing={2}>
             <GradientBorder borderRadius="xl" display="flex" gap="between">
-              <a href="#"/>
+              <a href="#" onClick={handleGoogleSignIn}>
                 <IconButton
                   color="white"
                   transition="all .25s ease"
@@ -128,6 +133,8 @@ function SignIn() {
                     borderRadius: borderRadius.xl,
                     paddingRight: "80px",
                     paddingLeft: "80px",
+                    paddingTop:"20px",
+                    paddingBottom:"20px", 
                     backgroundColor: secondary.focus,
                     "&:hover": {
                       backgroundColor: rgba(secondary.focus, 0.9),
@@ -142,14 +149,16 @@ function SignIn() {
                       color: white.focus,
                     })}
                   />
-                  <VuiTypography 
-                  mb="20px"
-                  sx={({ typography: { size } }) => ({ fontSize: size.lg })}
-                >
-                  Google
-                </VuiTypography>
-                
-              </IconButton>
+                  <VuiTypography
+                    fontSize="20px" 
+                    color="white"
+                    ml="12px"
+                    sx={{ fontSize: "20px", lineHeight: "30px" }} 
+                  >
+                    Google
+                  </VuiTypography>
+                </IconButton>
+              </a>
             </GradientBorder>
           </Stack>
           <VuiTypography
