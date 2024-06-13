@@ -95,8 +95,9 @@ function DashboardNavbar({ absolute, light, isMini }) {
         </VuiBox>
         {isMini ? null : (
           <VuiBox sx={(theme) => navbarRow(theme, { isMini })}>
-            {location.pathname === "/home" && (
+            {location.pathname === "/home" ? (
               <VuiBox color={light ? "white" : "inherit"} sx={{ display: "flex", alignItems: "center" }}>
+                <Link to="../../authentication/sign-in">
                 <IconButton sx={navbarIconButton} size="large">
                   <Icon
                     sx={({ palette: { dark, white } }) => ({
@@ -114,6 +115,8 @@ function DashboardNavbar({ absolute, light, isMini }) {
                     Sign In
                   </VuiTypography>
                 </IconButton>
+                </Link>
+                <Link to="../../authentication/sign-up">
                 <IconButton sx={navbarIconButton} size="large">
                   <Icon
                     sx={({ palette: { dark, white } }) => ({
@@ -131,9 +134,11 @@ function DashboardNavbar({ absolute, light, isMini }) {
                     Sign Up
                   </VuiTypography>
                 </IconButton>
+                </Link>
               </VuiBox>
-            )}
-            <IconButton sx={navbarIconButton} size="large">
+            ) : (
+              <>
+                <IconButton sx={navbarIconButton} size="large">
                   <Icon
                     sx={({ palette: { dark, white } }) => ({
                       color: light ? white.main : dark.main,
@@ -150,33 +155,35 @@ function DashboardNavbar({ absolute, light, isMini }) {
                     Logout
                   </VuiTypography>
                 </IconButton>
-            <IconButton
-              size="large"
-              color="inherit"
-              sx={navbarMobileMenu}
-              onClick={handleMiniSidenav}
-            >
-              <Icon className={"text-white"}>{miniSidenav ? "menu_open" : "menu"}</Icon>
-            </IconButton>
-            <IconButton
-              size="large"
-              color="inherit"
-              sx={navbarIconButton}
-              onClick={handleConfiguratorOpen}
-            >
-            </IconButton>
-            <IconButton
-              size="large"
-              color="inherit"
-              sx={navbarIconButton}
-              aria-controls="notification-menu"
-              aria-haspopup="true"
-              variant="contained"
-              onClick={handleOpenMenu}
-            >
-              <Icon className={light ? "text-white" : "text-dark"}>notifications</Icon>
-            </IconButton>
-            {renderMenu()}
+                <IconButton
+                  size="large"
+                  color="inherit"
+                  sx={navbarMobileMenu}
+                  onClick={handleMiniSidenav}
+                >
+                  <Icon className={"text-white"}>{miniSidenav ? "menu_open" : "menu"}</Icon>
+                </IconButton>
+                <IconButton
+                  size="large"
+                  color="inherit"
+                  sx={navbarIconButton}
+                  onClick={handleConfiguratorOpen}
+                >
+                </IconButton>
+                <IconButton
+                  size="large"
+                  color="inherit"
+                  sx={navbarIconButton}
+                  aria-controls="notification-menu"
+                  aria-haspopup="true"
+                  variant="contained"
+                  onClick={handleOpenMenu}
+                >
+                  <Icon className={light ? "text-white" : "text-dark"}>notifications</Icon>
+                </IconButton>
+                {renderMenu()}
+              </>
+            )}
           </VuiBox>
         )}
       </Toolbar>
