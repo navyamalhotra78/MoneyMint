@@ -14,15 +14,20 @@ function ProfileInfoCard({ title, description, info, social }) {
   const [isEditing, setIsEditing] = useState(false);
   const { size } = typography;
 
+  const handleToggleEdit = () => {
+    console.log("Toggle edit mode...");
+    setIsEditing(!isEditing);
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditableInfo({ ...editableInfo, [name]: value });
+    console.log(`Updated ${name} to: `, value);
   };
 
   const handleSave = () => {
-    // Here you can handle the save functionality
-    console.log("Saved info: ", editableInfo);
-    setIsEditing(false);
+    console.log("Saving info: ", editableInfo);
+    setIsEditing(false); // Ensure editing mode is disabled after saving
   };
 
   const renderItems = Object.keys(editableInfo).map((label, key) => (
@@ -69,9 +74,15 @@ function ProfileInfoCard({ title, description, info, social }) {
         <VuiTypography variant="lg" fontWeight="bold" color="white" textTransform="capitalize">
           {title}
         </VuiTypography>
-        <Button onClick={() => setIsEditing(!isEditing)} variant="contained" color="primary">
-          {isEditing ? "Cancel" : "Edit"}
-        </Button>
+        {isEditing ? (
+          <Button onClick={handleSave} variant="contained" color="primary" style={{ zIndex: 150, color:"white"}}>
+            Save
+          </Button>
+        ) : (
+          <Button onClick={handleToggleEdit} variant="contained" color="primary" style={{ zIndex: 150, color:"white" }}>
+            Edit
+          </Button>
+        )}
       </VuiBox>
       <VuiBox>
         <VuiBox mb={2} lineHeight={1}>
@@ -84,16 +95,16 @@ function ProfileInfoCard({ title, description, info, social }) {
         </VuiBox>
         <VuiBox>{renderItems}</VuiBox>
         <VuiBox display="flex" py={1} pr={2} color="white">
-          <VuiTypography variant="button" fontWeight="regular" color="text" textTransform="capitalize">
+          <VuiTypography
+            variant="button"
+            fontWeight="regular"
+            color="text"
+            textTransform="capitalize"
+          >
             social: &nbsp;
           </VuiTypography>
           {renderSocial}
         </VuiBox>
-        {isEditing && (
-          <Button onClick={handleSave} variant="contained" color="primary">
-            Save
-          </Button>
-        )}
       </VuiBox>
     </Card>
   );

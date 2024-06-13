@@ -1,17 +1,33 @@
 import { useState, useEffect, useMemo } from "react";
+
+// react-router components
 import { Route, Switch, Redirect, useLocation } from "react-router-dom";
+
+// @mui material components
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Icon from "@mui/material/Icon";
+
+// Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
+
+// Vision UI Dashboard React example components
 import Sidenav from "examples/Sidenav";
 import Configurator from "examples/Configurator";
+
+// Vision UI Dashboard React themes
 import theme from "assets/theme";
 import themeRTL from "assets/theme/theme-rtl";
+
+// RTL plugins
 import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
+
+// Vision UI Dashboard React routes
 import routes from "routes";
+
+// Vision UI Dashboard React contexts
 import { useVisionUIController, setMiniSidenav, setOpenConfigurator } from "context";
 
 export default function App() {
@@ -21,14 +37,17 @@ export default function App() {
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
 
+  // Cache for the rtl
   useMemo(() => {
     const cacheRtl = createCache({
       key: "rtl",
       stylisPlugins: [rtlPlugin],
     });
+
     setRtlCache(cacheRtl);
   }, []);
 
+  // Open sidenav when mouse enter on mini sidenav
   const handleOnMouseEnter = () => {
     if (miniSidenav && !onMouseEnter) {
       setMiniSidenav(dispatch, false);
@@ -36,6 +55,7 @@ export default function App() {
     }
   };
 
+  // Close sidenav when mouse leave mini sidenav
   const handleOnMouseLeave = () => {
     if (onMouseEnter) {
       setMiniSidenav(dispatch, true);
@@ -43,47 +63,30 @@ export default function App() {
     }
   };
 
+  // Change the openConfigurator state
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
 
+  // Setting the dir attribute for the body element
   useEffect(() => {
     document.body.setAttribute("dir", direction);
   }, [direction]);
 
+  // Setting page scroll to 0 when changing the route
   useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
   }, [pathname]);
-
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1";
-    script.async = true;
-    document.body.appendChild(script);
-
-    window.addEventListener('dfMessengerLoaded', function (event) {
-      const dfMessenger = document.querySelector('df-messenger'); 
-      const style = document.createElement('style');
-  
-      const nonMobileMinWidth = 501; // Breakpoint where DF Messenger switches between mobile/non-mobile styles
-  
-      style.textContent = '@media screen and (min-width: ' + nonMobileMinWidth + 'px) { .chat-wrapper { max-height: 65% } }';
-  
-      dfMessenger.shadowRoot.querySelector('df-messenger-chat').shadowRoot.appendChild(style);
-    });
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
       if (route.collapse) {
         return getRoutes(route.collapse);
       }
+
       if (route.route) {
         return <Route exact path={route.route} component={route.component} key={route.key} />;
       }
+
       return null;
     });
 
@@ -91,91 +94,59 @@ export default function App() {
     <VuiBox
       display="flex"
       justifyContent="center"
-      sx={{ cursor: "pointer" }}
+      alignItems="center"
       onClick={handleConfiguratorOpen}
     >
     </VuiBox>
   );
 
-  return (
-    <>
-      <style>
-        {`
-          .chat-wrapper {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 400px; /* Adjust the width */
-            height: 500px; /* Adjust the height */
-            z-index: 1000;
-          }
-        `}
-      </style>
-      {direction === "rtl" ? (
-        <CacheProvider value={rtlCache}>
-          <ThemeProvider theme={themeRTL}>
-            <CssBaseline />
-            {layout === "dashboard" && (
-              <>
-                <Sidenav
-                  color={sidenavColor}
-                  brand=""
-                  brandName="MoneyMint"
-                  routes={routes}
-                  onMouseEnter={handleOnMouseEnter}
-                  onMouseLeave={handleOnMouseLeave}
-                />
-                <Configurator />
-                {configsButton}
-              </>
-            )}
-            {layout === "vr" && <Configurator />}
-            <Switch>
-              {getRoutes(routes)}
-              <Redirect from="*" to="/dashboard" />
-            </Switch>
-            <div className="chat-wrapper">
-              <df-messenger
-                intent="WELCOME"
-                chat-title="MoneyMint"
-                agent-id="c5a67c08-7b08-477d-8ca9-9a98fba0bfc2"
-                language-code="en"
-              ></df-messenger>
-            </div>
-          </ThemeProvider>
-        </CacheProvider>
-      ) : (
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          {layout === "dashboard" && (
-            <>
-              <Sidenav
-                color={sidenavColor}
-                brand=""
-                brandName="MoneyMint"
-                routes={routes}
-                onMouseEnter={handleOnMouseEnter}
-                onMouseLeave={handleOnMouseLeave}
-              />
-              <Configurator />
-              {configsButton}
-            </>
-          )}
-          {layout === "vr" && <Configurator />}
-          <Switch>
-            {getRoutes(routes)}
-            <Redirect from="*" to="/dashboard" />
-          </Switch>
-          <div className="chat-wrapper">
-            <df-messenger
-              intent="WELCOME"
-              chat-title="MoneyMint"
-              agent-id="c5a67c08-7b08-477d-8ca9-9a98fba0bfc2"
-              language-code="en"
-            ></df-messenger>
-          </div>
-        </ThemeProvider>
+  return direction === "rtl" ? (
+    <CacheProvider value={rtlCache}>
+      <ThemeProvider theme={themeRTL}>
+        <CssBaseline />
+        {layout === "dashboard" && (
+          <>
+            <Sidenav
+              color={sidenavColor}
+              brand=""
+              brandName="MoneyMint"
+              routes={routes}
+              onMouseEnter={handleOnMouseEnter}
+              onMouseLeave={handleOnMouseLeave}
+            />
+            <Configurator />
+            {configsButton}
+          </>
+        )}
+        {layout === "vr" && <Configurator />}
+        <Switch>
+          {getRoutes(routes)}
+          <Redirect from="*" to="/dashboard" />
+        </Switch>
+      </ThemeProvider>
+    </CacheProvider>
+  ) : (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {layout === "dashboard" && (
+        <>
+          <Sidenav
+            color={sidenavColor}
+            brand=""
+            brandName="MoneyMint"
+            routes={routes}
+            onMouseEnter={handleOnMouseEnter}
+            onMouseLeave={handleOnMouseLeave}
+          />
+          <Configurator />
+          {configsButton}
+        </>
       )}
-    </>
+      {layout === "vr" && <Configurator />}
+      <Switch>
+        {getRoutes(routes)}
+        <Redirect from="*" to="/dashboard" />
+      </Switch>
+    </ThemeProvider>
   );
 }

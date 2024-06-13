@@ -4,7 +4,6 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
 import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import Header from "layouts/profile/components/Header";
@@ -12,6 +11,31 @@ import Footer from "examples/Footer";
 import PlatformSettings from "layouts/profile/components/PlatformSettings";
 
 function Overview() {
+  const info = {
+    fullName: "Mark Johnson",
+    mobile: "(44) 123 1234 123",
+    email: "mark@simmmple.com",
+    location: "United States",
+  };
+
+  const social = [
+    {
+      link: "https://www.facebook.com/CreativeTim/",
+      icon: <FacebookIcon />,
+      color: "facebook",
+    },
+    {
+      link: "https://twitter.com/creativetim",
+      icon: <TwitterIcon />,
+      color: "twitter",
+    },
+    {
+      link: "https://www.instagram.com/creativetimofficial/",
+      icon: <InstagramIcon />,
+      color: "instagram",
+    },
+  ];
+
   return (
     <DashboardLayout>
       <Header />
@@ -53,29 +77,8 @@ function Overview() {
             <ProfileInfoCard
               title="profile information"
               description="Hi, Mark Johnson"
-              info={{
-                fullName: "Mark Johnson",
-                mobile: "(44) 123 1234 123",
-                email: "mark@simmmple.com",
-                location: "United States",
-              }}
-              social={[
-                {
-                  link: "https://www.facebook.com/CreativeTim/",
-                  icon: <FacebookIcon />,
-                  color: "facebook",
-                },
-                {
-                  link: "https://twitter.com/creativetim",
-                  icon: <TwitterIcon />,
-                  color: "twitter",
-                },
-                {
-                  link: "https://www.instagram.com/creativetimofficial/",
-                  icon: <InstagramIcon />,
-                  color: "instagram",
-                },
-              ]}
+              info={info}
+              social={social}
             />
           </Grid>
         </Grid>
