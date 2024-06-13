@@ -38,7 +38,7 @@ function Sidenav({ color, brandName, routes, ...rest }) {
   }, []);
 
   // Filter out "Home" route from routes
-  const filteredRoutes = routes.filter(route => route.name !== "Home");
+  const filteredRoutes = routes.filter(route => route.name !== "Home" && route.name !== "Sign Up" && route.name !== "Sign In" && route.name !== "Logout");
 
   // Render routes excluding "Home"
   const renderRoutes = filteredRoutes.map(({ type, name, icon, title, noCollapse, key, route, href }) => {
