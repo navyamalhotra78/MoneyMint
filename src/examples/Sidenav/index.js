@@ -1,37 +1,18 @@
 import { useEffect } from "react";
-
-// react-router-dom components
 import { useLocation, NavLink } from "react-router-dom";
-
-// prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
-
-// @mui material components
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
-
-// Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
-import VuiButton from "components/VuiButton";
-
-// Vision UI Dashboard React example components
-import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
-import SidenavCard from "examples/Sidenav/SidenavCard";
-
-// Custom styles for the Sidenav
+import { useVisionUIController, setMiniSidenav, setTransparentSidenav } from "context";
 import SidenavRoot from "examples/Sidenav/SidenavRoot";
 import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
-
-// Vision UI Dashboard React context
-import { useVisionUIController, setMiniSidenav, setTransparentSidenav } from "context";
-
-// Vision UI Dashboard React icons
 import SimmmpleLogo from "examples/Icons/logotemp";
+import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
 
-// function Sidenav({ color, brand, brandName, routes, ...rest }) {
 function Sidenav({ color, brandName, routes, ...rest }) {
   const [controller, dispatch] = useVisionUIController();
   const { miniSidenav, transparentSidenav } = controller;
@@ -42,20 +23,11 @@ function Sidenav({ color, brandName, routes, ...rest }) {
   const closeSidenav = () => setMiniSidenav(dispatch, true);
 
   useEffect(() => {
-    // A function that sets the mini state of the sidenav.
     function handleMiniSidenav() {
       setMiniSidenav(dispatch, window.innerWidth < 1200);
     }
-
-    /** 
-     The event listener that's calling the handleMiniSidenav function when resizing the window.
-    */
     window.addEventListener("resize", handleMiniSidenav);
-
-    // Call the handleMiniSidenav function to set the state with the initial value.
     handleMiniSidenav();
-
-    // Remove event listener on cleanup
     return () => window.removeEventListener("resize", handleMiniSidenav);
   }, [dispatch, location]);
 
@@ -65,8 +37,11 @@ function Sidenav({ color, brandName, routes, ...rest }) {
     }
   }, []);
 
-  // Render all the routes from the routes.js (All the visible items on the Sidenav)
-  const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, route, href }) => {
+  // Filter out "Home" route from routes
+  const filteredRoutes = routes.filter(route => route.name !== "Home");
+
+  // Render routes excluding "Home"
+  const renderRoutes = filteredRoutes.map(({ type, name, icon, title, noCollapse, key, route, href }) => {
     let returnValue;
 
     if (type === "collapse") {
@@ -122,7 +97,10 @@ function Sidenav({ color, brandName, routes, ...rest }) {
     return returnValue;
   });
 
-  return (
+  // Check if current pathname is the home page
+  const isHomePage = pathname === "/home";
+
+  return !isHomePage ? (
     <SidenavRoot {...rest} variant="permanent" ownerState={{ transparentSidenav, miniSidenav }}>
       <VuiBox
         pt={3.5}
@@ -224,19 +202,15 @@ function Sidenav({ color, brandName, routes, ...rest }) {
         
       </VuiBox>
     </SidenavRoot>
-  );
+  ) : null;
 }
 
-// Setting default values for the props of Sidenav
 Sidenav.defaultProps = {
   color: "info",
-  // brand: "",
 };
 
-// Typechecking props for the Sidenav
 Sidenav.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
-  // brand: PropTypes.string,
   brandName: PropTypes.string.isRequired,
   routes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
