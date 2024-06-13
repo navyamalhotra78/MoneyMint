@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { auth, googleProvider, database } from "../../../firebase"; // Import firebase auth instance and Google provider
+import { useHistory } from "react-router-dom";
+import { auth, googleProvider } from "../../../firebase"; // Import firebase auth instance and Google provider
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
 // @mui material components
@@ -16,7 +16,6 @@ import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import VuiInput from "components/VuiInput";
 import VuiButton from "components/VuiButton";
-import VuiSwitch from "components/VuiSwitch";
 import GradientBorder from "examples/GradientBorder";
 
 // Vision UI Dashboard assets
@@ -35,11 +34,9 @@ function SignIn() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState(null);
   const history = useHistory();
 
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
 
@@ -49,24 +46,25 @@ function SignIn() {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const userId = userCredential.user.uid;
       const db = getDatabase();
-      const usersRef = ref(db, "users/" + userId);
+      const usersRef = ref(db, 'users/' + userId);
       await set(usersRef, {
         username: name,
-        email: email,
+        email: email
       });
 
       console.log("User signed up successfully!");
-      history.push("dashboard");
+      history.push("/dashboard");
     } catch (error) {
       // Handle errors
       if (error.code === "auth/email-already-in-use") {
-        setError("User Exists");
+        setError("User already exists with this email.");
       } else {
         setError(error.message);
       }
       console.error("Error signing up:", error.message);
     }
   };
+
 
   const handleGoogleSignIn = async () => {
     try {
@@ -81,6 +79,10 @@ function SignIn() {
     }
   };
 
+  const navigateToSignIn = () => {
+    history.push("/authentication/sign-in");
+  };
+
   return (
     <CoverLayout
       title="Welcome!"
@@ -91,14 +93,7 @@ function SignIn() {
       top={13}
       overflow="visible"
     >
-      <GradientBorder
-        borderRadius={borders.borderRadius.form}
-        minWidth="28vw"
-        maxWidth="100%"
-        marginTop="-25px"
-        marginLeft="-10px"
-        overflow="visible"
-      >
+      <GradientBorder borderRadius={borders.borderRadius.form} minWidth="28vw" maxWidth="100%" marginTop="-25px" marginLeft="-10px" overflow="visible">
         <VuiBox
           component="form"
           role="form"
@@ -121,44 +116,39 @@ function SignIn() {
           </VuiTypography>
           <Stack mb="25px" justifyContent="center" alignItems="center" direction="row" spacing={2}>
             <GradientBorder borderRadius="xl" display="flex" gap="between">
-              <a href="#" onClick={handleGoogleSignIn}>
-                <IconButton
-                  color="white"
-                  transition="all .25s ease"
-                  justify="center"
-                  align="center"
-                  bg="rgb(19,21,54)"
-                  borderradius="15px"
-                  sx={({ palette: { secondary }, borders: { borderRadius } }) => ({
-                    borderRadius: borderRadius.xl,
-                    paddingRight: "80px",
-                    paddingLeft: "80px",
-                    paddingTop:"20px",
-                    paddingBottom:"20px", 
-                    backgroundColor: secondary.focus,
-                    "&:hover": {
-                      backgroundColor: rgba(secondary.focus, 0.9),
-                    },
+              <IconButton
+                color="white"
+                transition="all .25s ease"
+                justify="center"
+                align="center"
+                bg="rgb(19,21,54)"
+                borderradius="15px"
+                onClick={handleGoogleSignIn}
+                sx={({ palette: { secondary }, borders: { borderRadius } }) => ({
+                  borderRadius: borderRadius.xl,
+                  paddingRight: "80px",
+                  paddingLeft: "80px",
+                  backgroundColor: secondary.focus,
+                  "&:hover": {
+                    backgroundColor: rgba(secondary.focus, 0.9),
+                  },
+                })}
+              >
+                <Icon
+                  as={FaGoogle}
+                  w="30px"
+                  h="30px"
+                  sx={({ palette: { white } }) => ({
+                    color: white.focus,
                   })}
+                />
+                <VuiTypography
+                  mb="20px"
+                  sx={({ typography: { size } }) => ({ fontSize: size.lg })}
                 >
-                  <Icon
-                    as={FaGoogle}
-                    w="30px"
-                    h="30px"
-                    sx={({ palette: { white } }) => ({
-                      color: white.focus,
-                    })}
-                  />
-                  <VuiTypography
-                    fontSize="20px" 
-                    color="white"
-                    ml="12px"
-                    sx={{ fontSize: "20px", lineHeight: "30px" }} 
-                  >
-                    Google
-                  </VuiTypography>
-                </IconButton>
-              </a>
+                  Google
+                </VuiTypography>
+              </IconButton>
             </GradientBorder>
           </Stack>
           <VuiTypography
@@ -256,36 +246,20 @@ function SignIn() {
               />
             </GradientBorder>
           </VuiBox>
-          <VuiBox display="flex" alignItems="center">
-            <VuiSwitch color="info" checked={rememberMe} onChange={handleSetRememberMe} />
-            <VuiTypography
-              variant="caption"
-              color="white"
-              fontWeight="medium"
-              onClick={handleSetRememberMe}
-              sx={{ cursor: "pointer", userSelect: "none" }}
-            >
-              &nbsp;&nbsp;&nbsp;&nbsp;Remember me
-            </VuiTypography>
-          </VuiBox>
           <VuiBox mt={4} mb={1}>
             <VuiButton color="info" fullWidth onClick={handleSignUp}>
               SIGN UP
             </VuiButton>
           </VuiBox>
           <VuiBox mt={3} textAlign="center">
-            <VuiTypography variant="button" color="text" fontWeight="regular">
-              Already have an account?{" "}
-              <VuiTypography
-                component={Link}
-                to="/authentication/sign-in"
-                variant="button"
-                color="white"
-                fontWeight="medium"
-              >
-                Sign in
-              </VuiTypography>
-            </VuiTypography>
+            <VuiButton
+              color="white"
+              variant="text"
+              onClick={navigateToSignIn}
+              sx={{ cursor: "pointer", userSelect: "none" }}
+            >
+              Already have an account? Sign in
+            </VuiButton>
           </VuiBox>
         </VuiBox>
       </GradientBorder>
