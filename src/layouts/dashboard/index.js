@@ -60,15 +60,15 @@ function Dashboard() {
             </Grid>
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "Today's Expenditure" }}
-                count="₹5000"
+                title={{ text: "Monthly Budget" }}
+                count="₹10,000"
                 icon={{ color: "info", component: <IoGlobe size="22px" color="white" /> }}
               />
             </Grid>
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "Monthly Expenditure" }}
-                count="₹30,000"
+                title={{ text: "Monthly Savings" }}
+                count="₹5,000"
                 icon={{ color: "info", component: <FaShoppingCart size="20px" color="white" /> }}
               />
             </Grid>

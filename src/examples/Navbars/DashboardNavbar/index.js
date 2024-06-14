@@ -178,15 +178,17 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   size="large"
                   onClick={handleLogout}
                 >
-                  <ExitToAppIcon
+                  <Icon
                     sx={({ palette: { dark, white } }) => ({
                       color: light ? white.main : dark.main,
                     })}
-                  />
+                  >
+                    logout
+                    </Icon>
                   <VuiTypography
                     variant="button"
                     fontWeight="medium"
-                    color={light ? "white" : "dark"}
+                    color="white"
                     sx={{ ml: 1 }}
                   >
                     Logout

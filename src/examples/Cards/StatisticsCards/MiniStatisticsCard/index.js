@@ -1,36 +1,38 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-// prop-types is a library for typechecking of props
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-
-// @mui material components
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
 import Icon from "@mui/material/Icon";
-
-// Vision UI Dashboard React components
+import TextField from "@mui/material/TextField";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import colors from "assets/theme/base/colors";
 
 function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction }) {
   const { info } = colors;
+  const [isEditing, setIsEditing] = useState(false);
+  const [editableCount, setEditableCount] = useState(count);
+  const [editablePercentage, setEditablePercentage] = useState(percentage.text);
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleSave = () => {
+    // Implement save logic here
+    setIsEditing(false);
+  };
+
+  const handleCountChange = (e) => {
+    setEditableCount(e.target.value);
+  };
+
+  const handlePercentageChange = (e) => {
+    setEditablePercentage(e.target.value);
+  };
+
+  const isNextBillDueDate = title.text === "Next Bill Due Date";
 
   return (
     <Card sx={{ padding: "17px" }}>
@@ -65,11 +67,34 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
                 >
                   {title.text}
                 </VuiTypography>
-                <VuiTypography variant="subtitle1" fontWeight="bold" color="white">
-                  {count}{" "}
-                  <VuiTypography variant="button" color={percentage.color} fontWeight="bold">
-                    {percentage.text}
-                  </VuiTypography>
+                <VuiBox display="flex" alignItems="center">
+                  {isEditing && !isNextBillDueDate ? (
+                    <TextField
+                      variant="standard"
+                      value={editableCount}
+                      onChange={handleCountChange}
+                      InputProps={{ style: { color: "white" } }}
+                      autoFocus
+                    />
+                  ) : (
+                    <VuiTypography variant="subtitle1" fontWeight="bold" color="white">
+                      {editableCount}
+                    </VuiTypography>
+                  )}
+                  {!isNextBillDueDate && (
+                    <IconButton
+                      onClick={isEditing ? handleSave : handleEdit}
+                      size="small"
+                      style={{ marginLeft: 8, color: "grey" }}
+                    >
+                      <Icon fontSize="small">
+                        {isEditing ? "check" : "edit"}
+                      </Icon>
+                    </IconButton>
+                  )}
+                </VuiBox>
+                <VuiTypography variant="button" color={percentage.color} fontWeight="bold">
+                  {editablePercentage}
                 </VuiTypography>
               </VuiBox>
             </Grid>
@@ -126,7 +151,7 @@ MiniStatisticsCard.propTypes = {
     "error",
     "dark",
   ]),
-  title: PropTypes.PropTypes.shape({
+  title: PropTypes.shape({
     fontWeight: PropTypes.oneOf(["light", "regular", "medium", "bold"]),
     text: PropTypes.string,
   }),
