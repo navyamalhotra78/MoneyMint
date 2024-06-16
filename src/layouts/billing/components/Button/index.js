@@ -3,13 +3,12 @@ import Card from "@mui/material/Card";
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
-import VuiTypography from "components/VuiTypography";
 import VuiButton from "components/VuiButton";
 
 // Button component
 function Button() {
   const handleClick = () => {
-    const url = "https://www.example.com"; // Change this to the desired URL
+    const url = "https://www.example.com"; 
     window.open(url, '_blank');
   };
 

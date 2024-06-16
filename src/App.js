@@ -180,7 +180,7 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Switch>
         {getRoutes(routes)}
-        <Redirect from="*" to="/dashboard" />
+        <Redirect from="*" to="/home" />
       </Switch>
       {/* Botpress Webchat Wrapper */}
       <div id="bp-web-widget" className="bp-widget-container"></div>

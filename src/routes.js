@@ -69,7 +69,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Billing",
+    name: "Financial Calculators",
     key: "billing",
     route: "/billing",
     icon: <BsCreditCardFill size="15px" color="inherit" />,

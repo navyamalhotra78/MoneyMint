@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { useLocation, Link, useHistory } from "react-router-dom"; // Import useHistory
+import { useLocation, Link, useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import Icon from "@mui/material/Icon";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import Breadcrumbs from "examples/Breadcrumbs";
@@ -24,8 +23,6 @@ import {
   setMiniSidenav,
   setOpenConfigurator,
 } from "context";
-import team2 from "assets/images/team-2.jpg";
-import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
 
 // Import Firebase authentication
 import { auth } from "../../../firebase";
@@ -37,7 +34,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
     controller;
   const [openMenu, setOpenMenu] = useState(false);
   const location = useLocation();
-  const history = useHistory(); // Initialize useHistory hook
+  const history = useHistory();
   const route = location.pathname.split("/").slice(1);
 
   useEffect(() => {
@@ -75,6 +72,12 @@ function DashboardNavbar({ absolute, light, isMini }) {
     } catch (error) {
       console.error("Error signing out:", error.message);
     }
+  };
+
+  const handleHomeIconClick = () => {
+    // Navigate to dashboard route
+    history.push("/dashboard");
+    // Optionally, you can set other state or perform additional logic
   };
 
   const renderMenu = () => (
@@ -118,20 +121,30 @@ function DashboardNavbar({ absolute, light, isMini }) {
           mb={{ xs: 1, md: 0 }}
           sx={(theme) => navbarRow(theme, { isMini })}
         >
-          <Breadcrumbs
-            icon="home"
-            title={route[route.length - 1]}
-            route={route}
-            light={light}
-          />
+          {location.pathname !== "/home" && ( // Conditionally render Breadcrumbs
+            <Breadcrumbs
+              icon="home"
+              title={route[route.length - 1]}
+              onClick={handleHomeIconClick}
+              route={route}
+              light={light}
+            />
+          )}
         </VuiBox>
-        {isMini ? null : (
-          <VuiBox sx={(theme) => navbarRow(theme, { isMini })}>
-            {location.pathname === "/home" ? (
-              <VuiBox
-                color={light ? "white" : "inherit"}
-                sx={{ display: "flex", alignItems: "center" }}
-              >
+        <VuiBox
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            flex: 1,
+          }}
+        >
+          <VuiBox
+            color={light ? "white" : "inherit"}
+            sx={{ display: "flex", alignItems: "center" }}
+          >
+            {location.pathname === "/home" && ( // Render Sign In/Sign Up for home page
+              <>
                 <Link to="../../authentication/sign-in">
                   <IconButton sx={navbarIconButton} size="large">
                     <Icon
@@ -170,81 +183,83 @@ function DashboardNavbar({ absolute, light, isMini }) {
                     </VuiTypography>
                   </IconButton>
                 </Link>
-              </VuiBox>
-            ) : (
-              <>
-                <IconButton
-                  sx={navbarIconButton}
-                  size="large"
-                  onClick={handleLogout}
-                >
-                  <Icon
-                    sx={({ palette: { dark, white } }) => ({
-                      color: light ? white.main : dark.main,
-                    })}
-                  >
-                    logout
-                    </Icon>
-                  <VuiTypography
-                    variant="button"
-                    fontWeight="medium"
-                    color="white"
-                    sx={{ ml: 1 }}
-                  >
-                    Logout
-                  </VuiTypography>
-                </IconButton>
-                <IconButton
-                  size="large"
-                  color="inherit"
-                  sx={navbarMobileMenu}
-                  onClick={handleMiniSidenav}
-                >
-                  <Icon className={"text-white"}>
-                    {miniSidenav ? "menu_open" : "menu"}
-                  </Icon>
-                </IconButton>
-                <IconButton
-                  size="large"
-                  color="inherit"
-                  sx={navbarIconButton}
-                  onClick={handleConfiguratorOpen}
-                ></IconButton>
-                <IconButton
-                  size="large"
-                  color="inherit"
-                  sx={navbarIconButton}
-                  aria-controls="notification-menu"
-                  aria-haspopup="true"
-                  variant="contained"
-                  onClick={handleOpenMenu}
-                >
-                  <Icon className={light ? "text-white" : "text-dark"}>
-                    notifications
-                  </Icon>
-                </IconButton>
-                {renderMenu()}
-                <IconButton sx={navbarIconButton} size="large">
-                    <Icon
-                      sx={({ palette: { dark, white } }) => ({
-                        color: light ? white.main : dark.main,
-                        ml:2
-                      })}
-                    >
-                      account_circle
-                    </Icon>
-                    <VuiTypography
-                      variant="button"
-                      fontWeight="medium"
-                      color={light ? "white" : "dark"}
-                      sx={{ ml: 1}}
-                    >
-                    </VuiTypography>
-                  </IconButton>
               </>
             )}
           </VuiBox>
-        )}
+          {location.pathname !== "/home" && ( // Render other navbar items
+            <>
+              <IconButton
+                sx={navbarIconButton}
+                size="large"
+                onClick={handleLogout}
+              >
+                <Icon
+                  sx={({ palette: { dark, white } }) => ({
+                    color: light ? white.main : dark.main,
+                  })}
+                >
+                  logout
+                </Icon>
+                <VuiTypography
+                  variant="button"
+                  fontWeight="medium"
+                  color="white"
+                  sx={{ ml: 1 }}
+                >
+                  Logout
+                </VuiTypography>
+              </IconButton>
+              <IconButton
+                size="large"
+                color="inherit"
+                sx={navbarMobileMenu}
+                onClick={handleMiniSidenav}
+              >
+                <Icon className={"text-white"}>
+                  {miniSidenav ? "menu_open" : "menu"}
+                </Icon>
+              </IconButton>
+              <IconButton
+                size="large"
+                color="inherit"
+                sx={navbarIconButton}
+                onClick={handleConfiguratorOpen}
+              ></IconButton>
+              <IconButton
+                size="large"
+                color="inherit"
+                sx={navbarIconButton}
+                aria-controls="notification-menu"
+                aria-haspopup="true"
+                variant="contained"
+                onClick={handleOpenMenu}
+              >
+                <Icon className={light ? "text-white" : "text-dark"}>
+                  notifications
+                </Icon>
+              </IconButton>
+              {renderMenu()}
+              <IconButton sx={navbarIconButton} size="large">
+                <Icon
+                  sx={({ palette: { dark, white } }) => ({
+                    color: light ? white.main : dark.main,
+                    ml: 2,
+                  })}
+                >
+                  account_circle
+                </Icon>
+                <VuiTypography
+                  variant="button"
+                  fontWeight="medium"
+                  color={light ? "white" : "dark"}
+                  sx={{ ml: 1 }}
+                >
+                  Account
+                </VuiTypography>
+              </IconButton>
+            </>
+          )}
+        </VuiBox>
       </Toolbar>
     </AppBar>
   );
