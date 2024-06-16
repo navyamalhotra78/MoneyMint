@@ -224,6 +224,23 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   </Icon>
                 </IconButton>
                 {renderMenu()}
+                <IconButton sx={navbarIconButton} size="large">
+                    <Icon
+                      sx={({ palette: { dark, white } }) => ({
+                        color: light ? white.main : dark.main,
+                        ml:2
+                      })}
+                    >
+                      account_circle
+                    </Icon>
+                    <VuiTypography
+                      variant="button"
+                      fontWeight="medium"
+                      color={light ? "white" : "dark"}
+                      sx={{ ml: 1}}
+                    >
+                    </VuiTypography>
+                  </IconButton>
               </>
             )}
           </VuiBox>

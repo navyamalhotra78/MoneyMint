@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 // react-router components
 import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 
-// @mui material components
+// @mui/material components
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Icon from "@mui/material/Icon";
@@ -77,6 +77,37 @@ export default function App() {
     document.scrollingElement.scrollTop = 0;
   }, [pathname]);
 
+  useEffect(() => {
+    // Inject Botpress scripts
+    const script1 = document.createElement("script");
+    script1.src = "https://cdn.botpress.cloud/webchat/v2/inject.js";
+    script1.async = true;
+    document.body.appendChild(script1);
+
+    const script2 = document.createElement("script");
+    script2.src = "https://mediafiles.botpress.cloud/109c4867-675e-438c-8604-104cfb951f85/webchat/v2/config.js";
+    script2.defer = true;
+    document.body.appendChild(script2);
+
+    // Create and inject custom styles
+    const style = document.createElement("style");
+    style.textContent = `
+      #bp-web-widget {
+        z-index: 9999 !important;
+      }
+      #bp-web-widget .bp-widget-container {
+        z-index: 9999 !important;
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      document.body.removeChild(script1);
+      document.body.removeChild(script2);
+      document.head.removeChild(style);
+    };
+  }, []);
+
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
       if (route.collapse) {
@@ -97,6 +128,8 @@ export default function App() {
       alignItems="center"
       onClick={handleConfiguratorOpen}
     >
+      {/* Remove Icon since it's not defined */}
+      {/* <Icon>settings</Icon> */}
     </VuiBox>
   );
 
@@ -123,6 +156,8 @@ export default function App() {
           {getRoutes(routes)}
           <Redirect from="*" to="/dashboard" />
         </Switch>
+        {/* Botpress Webchat Wrapper */}
+        <div id="bp-web-widget" className="bp-widget-container"></div>
       </ThemeProvider>
     </CacheProvider>
   ) : (
@@ -147,6 +182,8 @@ export default function App() {
         {getRoutes(routes)}
         <Redirect from="*" to="/dashboard" />
       </Switch>
+      {/* Botpress Webchat Wrapper */}
+      <div id="bp-web-widget" className="bp-widget-container"></div>
     </ThemeProvider>
   );
 }
