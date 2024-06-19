@@ -7,9 +7,19 @@ import VuiButton from "components/VuiButton";
 
 // Button component
 function Button() {
-  const handleClick = () => {
-    const url = "https://www.example.com"; 
-    window.open(url, '_blank');
+  const handleClick = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/run-shiny'); // Backend server URL
+      if (response.ok) {
+        const data = await response.json();
+        const shinyPort = data.shinyPort;
+        window.open(`http://127.0.0.1:${shinyPort}`, '_blank'); // Open Shiny app with dynamic port
+      } else {
+        console.error('Failed to start Shiny app');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -22,7 +32,7 @@ function Button() {
           onClick={handleClick}
           sx={{ borderRadius: '8px' }}
         >
-          Open New Tab
+          Open Shiny App
         </VuiButton>
       </VuiBox>
     </Card>
