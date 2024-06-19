@@ -143,8 +143,10 @@ function SignIn() {
                   })}
                 />
                 <VuiTypography
-                  mb="20px"
-                  sx={({ typography: { size } }) => ({ fontSize: size.lg })}
+                  mt="3px"
+                  mb="3px"
+                  ml="20px"
+                  style={{ color: 'white', fontSize: '1.25rem' }}
                 >
                   Google
                 </VuiTypography>
