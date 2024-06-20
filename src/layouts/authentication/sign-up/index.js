@@ -3,6 +3,10 @@ import { useHistory } from "react-router-dom";
 import { auth, googleProvider } from "../../../firebase"; // Import firebase auth instance and Google provider
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
+import {doc,setDoc,getDoc} from "firebase/firestore"
+import { db } from "firebase";
+
+
 // @mui material components
 import Icon from "@mui/material/Icon";
 import IconButton from "@mui/material/IconButton";
@@ -37,6 +41,7 @@ function SignIn() {
   const [error, setError] = useState(null);
   const history = useHistory();
 
+
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
 
@@ -44,6 +49,8 @@ function SignIn() {
     e.preventDefault();
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user=userCredential.user;
+      
       const userId = userCredential.user.uid;
       const db = getDatabase();
       const usersRef = ref(db, 'users/' + userId);
@@ -51,7 +58,10 @@ function SignIn() {
         username: name,
         email: email
       });
+      createDoc(user);
 
+      console.log(userId);
+      console.log(name);
       console.log("User signed up successfully!");
       history.push("/dashboard");
     } catch (error) {
@@ -63,12 +73,42 @@ function SignIn() {
       }
       console.error("Error signing up:", error.message);
     }
+    
   };
+  
+  async function createDoc(user){
+    //make sure a entry with uid isnt present
+    if (!user) return;
 
-
+  const userRef = doc(db, "users", user.uid);
+  const userData = await getDoc(doc(db, "users", user.uid));
+  
+  if (!userData.exists()) {
+    const { displayName, email, photoURL } = user;
+    const createdAt = new Date();
+    try {
+      await setDoc(userRef, {
+        name: displayName ? displayName : name,
+        email,
+        photoURL: photoURL ? photoURL : "",
+        createdAt,
+      });
+     
+      
+    } catch (error) {
+      toast.error(error.message);
+      console.error("Error creating user document: ", error);
+      
+    }
+  }
+}
+  
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithPopup(auth, googleProvider);
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      await createDoc(user);
+      console.log(user);
       // User signed in with Google successfully
       console.log("User signed in with Google successfully!");
       history.push("/authentication/sign-in");
@@ -143,10 +183,8 @@ function SignIn() {
                   })}
                 />
                 <VuiTypography
-                  mt="3px"
-                  mb="3px"
-                  ml="20px"
-                  style={{ color: 'white', fontSize: '1.25rem' }}
+                  mb="20px"
+                  sx={({ typography: { size } }) => ({ fontSize: size.lg })}
                 >
                   Google
                 </VuiTypography>
