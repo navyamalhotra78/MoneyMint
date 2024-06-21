@@ -1,6 +1,10 @@
+
 import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 import { Card, LinearProgress, Stack } from "@mui/material";
+// to fetch user doc
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from "firebase";
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
@@ -21,7 +25,7 @@ import colors from "assets/theme/base/colors";
 // Dashboard layout components
 import WelcomeMark from "layouts/dashboard/components/WelcomeMark";
 import Projects from "layouts/dashboard/components/Projects";
-import OrderOverview from "layouts/dashboard/components/OrderOverview";
+
 import SatisfactionRate from "layouts/dashboard/components/SatisfactionRate";
 import ReferralTracking from "layouts/dashboard/components/ReferralTracking";
 
@@ -40,10 +44,13 @@ import { lineChartDataDashboard } from "layouts/dashboard/data/lineChartData";
 import { lineChartOptionsDashboard } from "layouts/dashboard/data/lineChartOptions";
 import { barChartDataDashboard } from "layouts/dashboard/data/barChartData";
 import { barChartOptionsDashboard } from "layouts/dashboard/data/barChartOptions";
+import { useEffect } from "react";
 
 function Dashboard() {
   const { gradients } = colors;
   const { cardContent } = gradients;
+  const [user]=useAuthState(auth);
+  console.log(user);
 
   return (
     <DashboardLayout>
@@ -53,22 +60,22 @@ function Dashboard() {
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "Total Income", fontWeight: "regular" }}
-                count="₹50,000"
+                title={{ text: "Income", fontWeight: "regular" }}
+                count="50000"
                 icon={{ color: "info", component: <IoWallet size="22px" color="white" /> }}
               />
             </Grid>
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "Monthly Budget" }}
-                count="₹10,000"
+                title={{ text: "Expense" }}
+                count="10000"
                 icon={{ color: "info", component: <IoGlobe size="22px" color="white" /> }}
               />
             </Grid>
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
-                title={{ text: "Monthly Savings" }}
-                count="₹5,000"
+                title={{ text: "Savings" }}
+                count="40000"
                 icon={{ color: "info", component: <FaShoppingCart size="20px" color="white" /> }}
               />
             </Grid>

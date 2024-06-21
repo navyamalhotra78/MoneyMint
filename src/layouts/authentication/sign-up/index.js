@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
 import {doc,setDoc,getDoc} from "firebase/firestore"
 import { db } from "firebase";
-
+import { updateProfile } from "firebase/auth";
 
 // @mui material components
 import Icon from "@mui/material/Icon";
@@ -50,9 +50,13 @@ function SignIn() {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user=userCredential.user;
-      
       const userId = userCredential.user.uid;
       const db = getDatabase();
+      await updateProfile(user, {
+        displayName: name,
+      });
+  
+      
       const usersRef = ref(db, 'users/' + userId);
       await set(usersRef, {
         username: name,
@@ -76,7 +80,7 @@ function SignIn() {
     
   };
   
-  async function createDoc(user){
+  async function createDoc(user,name){
     //make sure a entry with uid isnt present
     if (!user) return;
 
@@ -88,16 +92,13 @@ function SignIn() {
     const createdAt = new Date();
     try {
       await setDoc(userRef, {
-        name: displayName ? displayName : name,
+        name: displayName || name,
         email,
         photoURL: photoURL ? photoURL : "",
         createdAt,
       });
-     
-      
     } catch (error) {
-      toast.error(error.message);
-      console.error("Error creating user document: ", error);
+      console.log("Error creating user document: ", error);
       
     }
   }

@@ -1,5 +1,8 @@
 import React from "react";
 
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from "firebase";
+
 import { Card, Icon } from "@mui/material";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
@@ -7,6 +10,8 @@ import VuiTypography from "components/VuiTypography";
 import gif from "assets/images/homefin.jpg";
 
 const WelcomeMark = () => {
+  const [user]=useAuthState(auth);
+
   return (
     <Card sx={() => ({
       height: "340px",
@@ -21,7 +26,7 @@ const WelcomeMark = () => {
             Welcome back,
           </VuiTypography>
           <VuiTypography color="white" variant="h3" fontWeight="bold" mb="18px">
-            Mark Johnson
+            {user.displayName}
           </VuiTypography>
           
         </VuiBox>

@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { auth, googleProvider } from "../../../firebase"; // Import firebase auth instance and Google provider
 import { signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 
+
 // @mui/material components
 import Icon from "@mui/material/Icon";
 
