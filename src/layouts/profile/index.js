@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -10,13 +10,19 @@ import Header from "layouts/profile/components/Header";
 import Footer from "examples/Footer";
 import PlatformSettings from "layouts/profile/components/PlatformSettings";
 
+
 function Overview() {
+  
+  
+  
   const info = {
-    fullName: "Mark Johnson",
-    mobile: "(44) 123 1234 123",
-    email: "mark@simmmple.com",
-    location: "United States",
+    fullName: "mark",
+    mobile: "(+91) 8792524772",
+    email: "mark@gmail.com",
+    location: "India",
   };
+ 
+
 
   const social = [
     {
@@ -76,8 +82,6 @@ function Overview() {
           >
             <ProfileInfoCard
               title="profile information"
-              description="Hi, Mark Johnson"
-              info={info}
               social={social}
             />
           </Grid>

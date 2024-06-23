@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
@@ -8,12 +8,50 @@ import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
+import { db } from "firebase";
+import {  doc, getDoc, updateDoc } from "firebase/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "firebase";
 
-function ProfileInfoCard({ title, description, info, social }) {
-  const [editableInfo, setEditableInfo] = useState(info);
+function ProfileInfoCard({ title,social }) {
+ 
   const [isEditing, setIsEditing] = useState(false);
   const { size } = typography;
 
+  const [user] = useAuthState(auth);
+  const [editableInfo, setEditableInfo] = useState({
+    fullName: "",
+    mobile: "(+91) 8792524772",
+    email: "",
+    location: "India",
+  });
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      if (user) {
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          const { fullName, mobile, email, location } = userData;
+          // Convert any Firestore timestamps to strings
+          // if (userData.timestamp) {
+          //   userData.timestamp = userData.timestamp.toDate().toLocaleString();
+          // }
+          // setEditableInfo(userData);
+          // // setEditableInfo(docSnap.data());
+          setEditableInfo({
+            fullName: user.displayName || "",
+            mobile: mobile || "(+91) 8792524772", // default value
+            email: email || user.email,
+            location: location || "India", // default value
+          });
+        }
+      }
+    };
+    fetchUserInfo();
+  }, [user, db]);
+
+  
   const handleToggleEdit = () => {
     console.log("Toggle edit mode...");
     setIsEditing(!isEditing);
@@ -25,10 +63,19 @@ function ProfileInfoCard({ title, description, info, social }) {
     console.log(`Updated ${name} to: `, value);
   };
 
-  const handleSave = () => {
-    console.log("Saving info: ", editableInfo);
+  // const handleSave = () => {
+  //   console.log("Saving info: ", editableInfo);
+  //   setIsEditing(false); // Ensure editing mode is disabled after saving
+  // };
+
+  const handleSave = async () => {
+    if (user) {
+      const docRef = doc(db, "users", user.uid);
+      await updateDoc(docRef, editableInfo);
+    }
     setIsEditing(false); // Ensure editing mode is disabled after saving
   };
+
 
   const renderItems = Object.keys(editableInfo).map((label, key) => (
     <VuiBox key={label} display="flex" py={1} pr={2}>
@@ -45,7 +92,7 @@ function ProfileInfoCard({ title, description, info, social }) {
         />
       ) : (
         <VuiTypography variant="button" fontWeight="regular" color="white">
-          &nbsp;{editableInfo[label]}
+          &nbsp;{editableInfo[label]?.toLocaleString()}
         </VuiTypography>
       )}
     </VuiBox>
@@ -87,7 +134,7 @@ function ProfileInfoCard({ title, description, info, social }) {
       <VuiBox>
         <VuiBox mb={2} lineHeight={1}>
           <VuiTypography variant="button" color="text" fontWeight="regular">
-            {description}
+          {`Hi, ${user.displayName}`}
           </VuiTypography>
         </VuiBox>
         <VuiBox opacity={0.3}>
@@ -112,8 +159,6 @@ function ProfileInfoCard({ title, description, info, social }) {
 
 ProfileInfoCard.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  info: PropTypes.objectOf(PropTypes.string).isRequired,
   social: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
