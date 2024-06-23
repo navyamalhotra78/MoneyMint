@@ -16,6 +16,11 @@ import { collection,addDoc,query,getDocs } from "firebase/firestore";
 function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction }) {
   const [user] =useAuthState(auth);   // to get user for adding transactions
   const [transactions, setTransactions] = useState([]);
+  const [currentBalance, setCurrentBalance] = useState(0);
+  const [income, setIncome] = useState(0);
+  const [expenses, setExpenses] = useState(0);
+
+
 
   const { info } = colors;
   const [isEditing, setIsEditing] = useState(false);
@@ -26,13 +31,13 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
     setIsEditing(true);
   };
 
-  const handleSave = (values,type) => {   // same as onFinish function
+  const handleSave = (value,type) => {   // same as onFinish function
     // Implement save logic here
-  //  console.log("onfinish",values,type);
+  //  console.log("onfinish",value,type);
   if(type!=="Savings") {
   const newTransaction = {
     type: type,
-    amount: parseFloat(values),
+    amount: parseFloat(value),
   };
    setTransactions([...transactions, newTransaction]);
    addTransaction(newTransaction);
@@ -60,6 +65,34 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
       }
     }
   }
+
+
+  // function calculateBalance(){
+  //   let incomeTotal = 0;
+  //   let expensesTotal = 0;
+
+  //   transactions.forEach((transaction) => {
+  //     if (transaction.type === "Income") {
+  //       incomeTotal += transaction.amount;
+  //     } else if(transaction.type === "Expense"){
+  //       expensesTotal += transaction.amount;
+  //     }
+  //   });
+
+  //   // setIncome(incomeTotal);
+  //   // setExpenses(expensesTotal);
+  //   setCurrentBalance(incomeTotal - expensesTotal);
+  // };
+
+
+
+
+  
+  // useEffect(() => {
+  //   calculateBalance();
+  //  }, [transactions]);
+
+
   // useEffect(() => {
   //  fetchTransactions();
   // }, []);
@@ -86,9 +119,9 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
     
   };
 
-  const handlePercentageChange = (e) => {
-    setEditablePercentage(e.target.value);
-  };
+  // const handlePercentageChange = (e) => {
+  //   setEditablePercentage(e.target.value);
+  // };
   const onEnter=(e)=>{
     if(e.keyCode=='13'){
       handleSave(editableCount,title.text); 
@@ -133,6 +166,10 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
                 <VuiBox display="flex" alignItems="center">
                   {isEditing && !isNextBillDueDate ? (
                     <TextField
+                      // currentBalance={currentBalance}
+                      // income={income}
+                      // expenses={expenses}
+
                       variant="standard"
                       value={editableCount}
                       onChange={handleCountChange}
@@ -147,7 +184,7 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
                   )}
                   {!isNextBillDueDate && (
                     <IconButton
-                      onClick={isEditing ? handleSave : handleEdit}
+                      onClick={isEditing ? null : handleEdit}
                       size="small"
                       style={{ marginLeft: 8, color: "grey" }}
                     >
@@ -189,7 +226,7 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
   );
 }
 
-// Setting default values for the props of MiniStatisticsCard
+// Setting default value for the props of MiniStatisticsCard
 MiniStatisticsCard.defaultProps = {
   bgColor: "white",
   title: {

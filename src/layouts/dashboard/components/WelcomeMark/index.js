@@ -26,7 +26,7 @@ const WelcomeMark = () => {
             Welcome back,
           </VuiTypography>
           <VuiTypography color="white" variant="h3" fontWeight="bold" mb="18px">
-            {user.displayName}
+            {user.displayName?user.displayName:"John"}
           </VuiTypography>
           
         </VuiBox>
