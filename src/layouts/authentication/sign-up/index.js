@@ -143,6 +143,8 @@ function SignIn() {
           role="form"
           borderRadius="inherit"
           p="45px"
+          mr="-25px"
+          ml="10px"
           sx={({ palette: { secondary } }) => ({
             backgroundColor: secondary.focus,
           })}
