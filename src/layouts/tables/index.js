@@ -12,7 +12,6 @@ import Table from "examples/Tables/Table";
 import Invoices from "layouts/billing/components/Invoices";
 import authorsTableData from "layouts/tables/data/authorsTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
-
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 function Tables() {

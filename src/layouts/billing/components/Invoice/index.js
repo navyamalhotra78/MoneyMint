@@ -48,7 +48,7 @@ function Invoice({ date, id, price }) {
         <VuiBox display="flex" alignItems="center" lineHeight={0} ml={3} sx={{ cursor: "poiner" }}>
           <IoDocumentText color="#fff" size="15px" />
           <VuiTypography variant="button" fontWeight="medium" color="text">
-            &nbsp;PDF
+            &nbsp;IMG
           </VuiTypography>
         </VuiBox>
       </VuiBox>
