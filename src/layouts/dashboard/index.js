@@ -50,7 +50,10 @@ function Dashboard() {
   const { gradients } = colors;
   const { cardContent } = gradients;
   const [user]=useAuthState(auth);
-  console.log(user);
+  useEffect(() => {
+    console.log(user);
+  }, [])
+  
 
   return (
     <DashboardLayout>
@@ -75,7 +78,7 @@ function Dashboard() {
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "Savings" }}
-                count="4000"
+                count="44000"
                 icon={{ color: "info", component: <FaShoppingCart size="20px" color="white" /> }}
               />
             </Grid>

@@ -1,25 +1,46 @@
 
-// @mui material components
+import React, { useEffect, useState } from "react";
+import { db,auth } from "firebase";
+import {collection, onSnapshot } from "firebase/firestore";
 import Card from "@mui/material/Card";
-
-// Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
-
-// Vision UI Dashboard React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import Table from "examples/Tables/Table";
 import Invoices from "layouts/billing/components/Invoices";
-
-// Data
 import authorsTableData from "layouts/tables/data/authorsTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
 
+import { useAuthState } from 'react-firebase-hooks/auth';
+
 function Tables() {
+  const [transactions, setTransactions] = useState([]);
+  const [user] = useAuthState(auth);
+
+  useEffect(() => {
+    if (user) {
+      const dbRef = collection(db, `users/${user.uid}/transactions`);
+
+      const unsubscribe = onSnapshot(dbRef, (docsSnap) => {
+        const transactionsArray = [];
+        docsSnap.forEach((doc) => {
+          transactionsArray.push(doc.data());
+        });
+        setTransactions(transactionsArray);
+        console.log(transactionsArray);
+        console.log("Transactions Fetched!");
+      });
+
+      // Cleanup on unmount
+      return () => unsubscribe();
+    }
+  }, []);
+
   const { columns, rows } = authorsTableData;
-  const { columns: prCols, rows: prRows } = projectsTableData;
+
+  const { columns: trCols, rows: trRows } = projectsTableData(transactions); // Generate the rows dynamically
 
   return (
     <DashboardLayout>
@@ -53,7 +74,7 @@ function Tables() {
         <Card>
           <VuiBox display="flex" justifyContent="space-between" alignItems="center">
             <VuiTypography variant="lg" color="white">
-              Expenditure
+              Transactions
             </VuiTypography>
           </VuiBox>
           <VuiBox
@@ -70,10 +91,10 @@ function Tables() {
               },
             }}
           >
-            <Table columns={prCols} rows={prRows} />
+            <Table columns={trCols} rows={trRows} />
           </VuiBox>
         </Card>
-        <VuiBox mt={3}> 
+        <VuiBox mt={3}>
           <Invoices />
         </VuiBox>
       </VuiBox>
@@ -83,3 +104,4 @@ function Tables() {
 }
 
 export default Tables;
+

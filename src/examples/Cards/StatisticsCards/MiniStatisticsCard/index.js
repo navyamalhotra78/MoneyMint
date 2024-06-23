@@ -11,7 +11,7 @@ import colors from "assets/theme/base/colors";
 // to fetch user object 
 import { auth,db } from "firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { collection,addDoc,query,getDocs } from "firebase/firestore";
+import { collection,addDoc } from "firebase/firestore";
 
 function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction }) {
   const [user] =useAuthState(auth);   // to get user for adding transactions
@@ -42,7 +42,7 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
    setTransactions([...transactions, newTransaction]);
    addTransaction(newTransaction);
   //  calculateBalance();
-
+ 
     setIsEditing(false);
 }
   };
@@ -58,6 +58,7 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
       if (!many) {
         console.log("Transaction Added!");
       }
+      // fetchTransactions();
     } catch (e) {
       console.log("Error adding document: ", e);
       if (!many) {
@@ -96,22 +97,24 @@ function MiniStatisticsCard({ bgColor, title, count, percentage, icon, direction
   // useEffect(() => {
   //  fetchTransactions();
   // }, []);
-  
-  async function fetchTransactions() {
+
+  //async function fetchTransactions() {
     
-    if (user) {
-      const q = query(collection(db, `users/${user.uid}/transactions`));
-      const querySnapshot = await getDocs(q);
-      let transactionsArray = [];
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        transactionsArray.push(doc.data());
-      });
-      setTransactions(transactionsArray);
-      console.log(transactionsArray);
-      console.log("Transactions Fetched!");
-    }
-  }
+  //     if (user) {
+  //       const q = query(collection(db, `users/${user.uid}/transactions`));
+  //       const querySnapshot = await getDocs(q);
+  //       let transactionsArray = [];
+  //       querySnapshot.forEach((doc) => {
+  //         // doc.data() is never undefined for query doc snapshots
+  //         transactionsArray.push(doc.data());
+  //       });
+  //       setTransactions(transactionsArray);
+  //       console.log(transactionsArray);
+  //       console.log("Transactions Fetched!");
+  //     }
+  //   }
+ 
+  
 
 
   const handleCountChange = (e) => {
