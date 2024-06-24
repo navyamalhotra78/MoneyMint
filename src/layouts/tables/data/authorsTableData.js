@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
+import { FaPencilAlt } from "react-icons/fa"; // Import pencil icon from react-icons/fa
 
 // Dropdown component for Paid/Unpaid status
 function StatusDropdown({ initialStatus, onUpdateStatus }) {
@@ -43,6 +44,46 @@ function StatusDropdown({ initialStatus, onUpdateStatus }) {
   );
 }
 
+// Function component for displaying amount (now editable)
+function Function({ amt }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [amount, setAmount] = useState(amt);
+
+  const handleDoubleClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleBlur = () => {
+    setIsEditing(false);
+    // You can add saving functionality here, like updating data or API call
+  };
+
+  const handleChange = (event) => {
+    setAmount(event.target.value);
+  };
+
+  return (
+    <VuiBox display="flex" flexDirection="row" alignItems="center">
+      <FaPencilAlt style={{ marginRight: "4px", color: "grey" }} /> {/* Pencil icon */}
+      {isEditing ? (
+        <input
+          type="text"
+          value={amount}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          autoFocus
+        />
+      ) : (
+        <div onDoubleClick={handleDoubleClick} style={{ cursor: "pointer" }}>
+          <VuiTypography variant="caption" fontWeight="medium" color="white">
+            ₹ {amount}
+          </VuiTypography>
+        </div>
+      )}
+    </VuiBox>
+  );
+}
+
 // Author component (unchanged)
 function Author({ name }) {
   return (
@@ -56,18 +97,7 @@ function Author({ name }) {
   );
 }
 
-// Function component for displaying amount (unchanged)
-function Function({ amt }) {
-  return (
-    <VuiBox display="flex" flexDirection="column">
-      <VuiTypography variant="caption" fontWeight="medium" color="white">
-        ₹ {amt}
-      </VuiTypography>
-    </VuiBox>
-  );
-}
-
-// Main data structure with columns and rows (updated with StatusDropdown usage)
+// Main data structure with columns and rows (updated with editable amount)
 const data = {
   columns: [
     { name: "name", align: "left" },
