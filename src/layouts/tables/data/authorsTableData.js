@@ -118,7 +118,7 @@ const data = {
       due: <VuiTypography variant="caption" color="white" fontWeight="medium">23/04/18</VuiTypography>
     },
     {
-      name: <Author name="Car Loan Installment" />,
+      name: <Author name="Home EMI" />,
       amount: <Function amt="10000" />,
       status: (
         <StatusDropdown
@@ -129,7 +129,7 @@ const data = {
       due: <VuiTypography variant="caption" color="white" fontWeight="medium">11/01/19</VuiTypography>
     },
     {
-      name: <Author name="Car Loan Installment" />,
+      name: <Author name="Electricity Bill" />,
       amount: <Function amt="10000" />,
       status: (
         <StatusDropdown
