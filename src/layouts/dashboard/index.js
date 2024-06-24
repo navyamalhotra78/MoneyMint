@@ -75,7 +75,7 @@ function Dashboard() {
                 icon={{ color: "info", component: <IoGlobe size="22px" color="white" /> }}
               />
             </Grid>
-            <Grid item xs={12} md={6} xl={3}>
+            {/* <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
                 title={{ text: "Savings" }}
                 count="44000"
@@ -88,7 +88,7 @@ function Dashboard() {
                 count="25/05/2024"
                 icon={{ color: "info", component: <IoDocumentText size="22px" color="white" /> }}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
         </VuiBox>
         <VuiBox mb={3}>
