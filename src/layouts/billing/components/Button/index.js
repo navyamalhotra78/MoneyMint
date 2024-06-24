@@ -23,14 +23,19 @@ function Button() {
   };
 
   return (
-    <Card id="open-button-card" sx={{ height: "100%" }}>
+    <Card id="open-button-card" sx={{ height: "100%", minHeight: '200px', width:"500px" }}>
       <VuiBox display="flex" justifyContent="center" alignItems="center" height="100%">
         <VuiButton
           variant="contained"
+          pointer="curson"
           color="info"
-          size="medium"
+          size="large" // Larger button size
           onClick={handleClick}
-          sx={{ borderRadius: '8px' }}
+          sx={{
+            borderRadius: '8px',
+            fontSize: '1.25rem', // Increase font size
+            padding: '1rem 2rem', // Increase padding
+          }}
         >
           Open Shiny App
         </VuiButton>
