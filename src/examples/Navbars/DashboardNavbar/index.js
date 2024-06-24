@@ -239,6 +239,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 </Icon>
               </IconButton>
               {renderMenu()}
+              <Link to="/profile">
               <IconButton sx={navbarIconButton} size="large">
                 <Icon
                   sx={({ palette: { dark, white } }) => ({
@@ -254,9 +255,10 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   color={light ? "white" : "dark"}
                   sx={{ ml: 1 }}
                 >
-                  Account
+                  
                 </VuiTypography>
               </IconButton>
+              </Link>
             </>
           )}
         </VuiBox>
