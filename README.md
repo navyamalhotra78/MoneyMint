@@ -24,9 +24,9 @@ The first step for the user is to create an account or login to their exisitng a
 - An IDE.
 
 ### Running the project
--Clone the project.
--Navigate to the project directory.
--Run the following command in your IDE terminal:
+- Clone the project.
+- Navigate to the project directory.
+- Run the following command in your IDE terminal:
     npm run start
 
 
